@@ -14,6 +14,7 @@ class PortfolioTab extends StatelessWidget {
             'Portfolio',
             style: Theme.of(context).textTheme.headline3!.copyWith(
                   color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+                  fontWeight: FontWeight.bold,
                 ),
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/constants.dart';
+import 'package:my_share_nepal/reusable/tools_card.dart';
 
 class ToolsTab extends StatelessWidget {
   @override
@@ -14,7 +15,33 @@ class ToolsTab extends StatelessWidget {
             'Tools',
             style: Theme.of(context).textTheme.headline3!.copyWith(
                   color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+                  fontWeight: FontWeight.bold,
                 ),
+          ),
+          SizedBox(
+            height: kDefaultPadding,
+          ),
+          Wrap(
+            children: [
+              ToolsCard(
+                title: 'Calculator',
+                icon: Icons.calculate,
+                onPressed: () {},
+              ),
+              SizedBox(
+                width: kDefaultPadding,
+              ),
+              ToolsCard(
+                title: 'Comparison',
+                icon: Icons.compare_arrows,
+                onPressed: () {},
+              ),
+              ToolsCard(
+                title: 'Analysis',
+                icon: Icons.insights,
+                onPressed: () {},
+              ),
+            ],
           ),
         ],
       ),
