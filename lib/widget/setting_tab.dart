@@ -15,6 +15,7 @@ class _SettingTabState extends State<SettingTab> {
     bool isSystemTheme = context.watch<ThemeCubit>().state == 2;
     bool isDarkTheme = context.watch<ThemeCubit>().state == 1;
     return Container(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       color: Theme.of(context).primaryColorDark,
       child: ListView(
         padding: EdgeInsets.all(kDefaultPadding),
