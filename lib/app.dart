@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_share_nepal/widget/home_tab.dart';
-import 'package:my_share_nepal/widget/portfolio_tab.dart';
-import 'package:my_share_nepal/widget/search_tab.dart';
-import 'package:my_share_nepal/widget/setting_tab.dart';
-import 'package:my_share_nepal/widget/tools_tab.dart';
+import 'package:my_share_nepal/tab/home_tab.dart';
+import 'package:my_share_nepal/tab/portfolio_tab.dart';
+import 'package:my_share_nepal/tab/search_tab.dart';
+import 'package:my_share_nepal/tab/setting_tab.dart';
+import 'package:my_share_nepal/tab/tools_tab.dart';
 
 class App extends StatefulWidget {
   @override

@@ -6,12 +6,15 @@ class SearchTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      color: Theme.of(context).primaryColorDark,
       child: ListView(
         padding: EdgeInsets.all(kDefaultPadding),
         children: [
           Text(
             'Search',
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context).textTheme.headline3!.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+                ),
           ),
         ],
       ),

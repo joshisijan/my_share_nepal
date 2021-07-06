@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/constants.dart';
 
-class ToolsTab extends StatelessWidget {
+class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,7 +11,7 @@ class ToolsTab extends StatelessWidget {
         padding: EdgeInsets.all(kDefaultPadding),
         children: [
           Text(
-            'Settings',
+            'Home',
             style: Theme.of(context).textTheme.headline3!.copyWith(
                   color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
                 ),

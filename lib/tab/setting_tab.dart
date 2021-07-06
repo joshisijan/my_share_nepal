@@ -3,6 +3,7 @@ import 'package:my_share_nepal/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_share_nepal/cubit/theme_cubit.dart';
 import 'package:my_share_nepal/reusable/setting_list_tile.dart';
+import 'package:my_share_nepal/widget/app_color_list.dart';
 
 class SettingTab extends StatefulWidget {
   @override
@@ -12,8 +13,8 @@ class SettingTab extends StatefulWidget {
 class _SettingTabState extends State<SettingTab> {
   @override
   Widget build(BuildContext context) {
-    bool isSystemTheme = context.watch<ThemeCubit>().state == 2;
-    bool isDarkTheme = context.watch<ThemeCubit>().state == 1;
+    bool isDarkTheme =
+        context.watch<ThemeCubit>().state.brightness == Brightness.dark;
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       color: Theme.of(context).primaryColorDark,
@@ -56,34 +57,30 @@ class _SettingTabState extends State<SettingTab> {
                   color: Theme.of(context).primaryColorDark,
                 ),
                 SettingListTile(
-                  icon: Icons.format_paint,
-                  title: 'System Theme',
-                  trailing: Switch(
-                    value: isSystemTheme,
-                    onChanged: (value) {
-                      if (isSystemTheme) {
-                        context.read<ThemeCubit>().changeTheme(0);
-                      } else {
-                        context.read<ThemeCubit>().changeTheme(2);
-                      }
-                    },
-                  ),
-                ),
-                SettingListTile(
-                  disabled: isSystemTheme,
                   icon: Icons.dark_mode,
                   title: 'Dark Mode',
                   trailing: Switch(
                     value: isDarkTheme,
                     onChanged: (value) {
-                      if (isDarkTheme) {
-                        context.read<ThemeCubit>().changeTheme(0);
-                      } else {
-                        context.read<ThemeCubit>().changeTheme(1);
-                      }
+                      context.read<ThemeCubit>().toggleDarkTheme();
                     },
                   ),
                 ),
+                SettingListTile(
+                  icon: Icons.palette,
+                  title: 'App Color',
+                  trailing: MaterialButton(
+                    child: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onPrimary
+                          .withAlpha(200),
+                    ),
+                    onPressed: null,
+                  ),
+                ),
+                AppColorList(),
               ],
             ),
           ),
