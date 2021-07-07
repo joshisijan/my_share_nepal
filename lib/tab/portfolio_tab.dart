@@ -17,6 +17,68 @@ class PortfolioTab extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
           ),
+          SizedBox(
+            height: kDefaultPadding,
+          ),
+          Container(
+            padding: EdgeInsets.all(kDefaultPadding),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+            ),
+            child: Column(
+              children: [
+                Text(
+                  'PORTFOLIO VALUE',
+                  style: Theme.of(context).textTheme.caption!.copyWith(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onPrimary
+                            .withAlpha(200),
+                      ),
+                ),
+                SizedBox(
+                  height: kDefaultPadding / 4,
+                ),
+                Text(
+                  'Rs. 200,000,000',
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                SizedBox(
+                  height: kDefaultPadding,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      'OVERALL PROFIT/LOSS',
+                      style: Theme.of(context).textTheme.caption!.copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimary
+                                .withAlpha(200),
+                          ),
+                    ),
+                    SizedBox(
+                      height: kDefaultPadding / 4,
+                    ),
+                    Text(
+                      'Rs. 200,000,000',
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: kDefaultPadding,
+          ),
         ],
       ),
     );

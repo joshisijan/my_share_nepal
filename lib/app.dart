@@ -12,13 +12,25 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final PageController _appBasePageController = PageController(
-    initialPage: 3,
+    initialPage: 2,
     keepPage: true,
   );
-  int _bottomNavigationBarIndex = 3;
+  int _bottomNavigationBarIndex = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: _bottomNavigationBarIndex == 2
+          ? MaterialButton(
+              color: Theme.of(context).primaryColor,
+              child: Text(
+                'Today\'s detail',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+                ),
+              ),
+              onPressed: () {},
+            )
+          : null,
       body: PageView(
         controller: _appBasePageController,
         physics: NeverScrollableScrollPhysics(),

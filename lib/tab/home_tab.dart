@@ -9,15 +9,7 @@ class HomeTab extends StatelessWidget {
       color: Theme.of(context).primaryColorDark,
       child: ListView(
         padding: EdgeInsets.all(kDefaultPadding),
-        children: [
-          Text(
-            'Home',
-            style: Theme.of(context).textTheme.headline3!.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-        ],
+        children: [],
       ),
     );
   }
