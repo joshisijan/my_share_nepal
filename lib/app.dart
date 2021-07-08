@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_share_nepal/constants.dart';
+import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/tab/home_tab.dart';
 import 'package:my_share_nepal/tab/portfolio_tab.dart';
 import 'package:my_share_nepal/tab/search_tab.dart';

@@ -1,9 +1,10 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:my_share_nepal/constants.dart';
+import 'package:my_share_nepal/helper/constants.dart';
+import 'package:my_share_nepal/model/symbol_todays_info.dart';
 import 'package:my_share_nepal/tab/portfolio_overall_tab.dart';
 import 'package:my_share_nepal/tab/portfolio_today_tab.dart';
+import 'package:my_share_nepal/widget/big_loading.dart';
 
 class PortfolioTab extends StatefulWidget {
   @override
@@ -90,7 +91,19 @@ class _PortfolioTabState extends State<PortfolioTab> {
                     ),
                   ],
                 ),
-                tabIndex == 0 ? PortfolioTodayTab() : PortfolioOverallTab(),
+                FutureBuilder(
+                  future: SymbolTodaysInfo().getSymbolTodaysInfo(),
+                  builder: (context, symbolTodayInfoSnapshot) {
+                    if (symbolTodayInfoSnapshot.connectionState !=
+                        ConnectionState.done) {
+                      return SizedBox();
+                    } else {
+                      return tabIndex == 0
+                          ? PortfolioTodayTab()
+                          : PortfolioOverallTab();
+                    }
+                  },
+                ),
               ],
             ),
           ),

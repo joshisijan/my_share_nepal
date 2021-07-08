@@ -31,6 +31,7 @@ dependencies:
 
   flutter_bloc: ^7.0.1
   shared_preferences: ^2.0.6
+  sqflite: ^2.0.0+3
 
 dev_dependencies:
   flutter_test:

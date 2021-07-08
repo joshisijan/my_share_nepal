@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_share_nepal/constants.dart';
+import 'package:my_share_nepal/helper/constants.dart';
 
 class HomeTab extends StatelessWidget {
   @override
