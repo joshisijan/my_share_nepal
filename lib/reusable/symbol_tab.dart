@@ -14,15 +14,19 @@ class SymbolTab extends StatelessWidget {
           color: Theme.of(context).primaryColor,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: kDefaultPadding,
-            vertical: kDefaultPadding / 2,
-          ),
+          padding: EdgeInsets.all(kDefaultPadding / 2),
           child: Row(
             children: [
+              IconButton(
+                icon: Icon(
+                  Icons.remove_circle,
+                  color: Theme.of(context).primaryColorLight,
+                ),
+                onPressed: () {},
+              ),
               Text(
                 symbol,
-                style: Theme.of(context).textTheme.headline6!.copyWith(
+                style: Theme.of(context).textTheme.subtitle1!.copyWith(
                       color: Theme.of(context)
                           .colorScheme
                           .onPrimary
@@ -33,12 +37,15 @@ class SymbolTab extends StatelessWidget {
                 width: kDefaultPadding,
               ),
               Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                child: Wrap(
+                  alignment: WrapAlignment.end,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  runAlignment: WrapAlignment.spaceAround,
                   children: [
                     Text(
-                      '200.0',
-                      style: Theme.of(context).textTheme.headline6!.copyWith(
+                      '2,00,000.0',
+                      textAlign: TextAlign.end,
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
                                 .onPrimary
@@ -48,22 +55,34 @@ class SymbolTab extends StatelessWidget {
                     SizedBox(
                       width: kDefaultPadding,
                     ),
-                    Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.arrow_upward,
-                          size: Theme.of(context).textTheme.subtitle1!.fontSize,
-                          color: Colors.green,
-                        ),
-                        Text(
-                          '2.80%',
-                          style:
-                              Theme.of(context).textTheme.headline6!.copyWith(
-                                    color: Colors.green,
-                                  ),
-                        ),
-                      ],
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: kDefaultPadding / 2,
+                        vertical: kDefaultPadding / 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius:
+                            BorderRadius.circular(kDefaultBorderRadius),
+                      ),
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.arrow_upward,
+                            size:
+                                Theme.of(context).textTheme.bodyText2!.fontSize,
+                            color: Colors.green,
+                          ),
+                          Text(
+                            '1.80%',
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      color: Colors.green,
+                                    ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

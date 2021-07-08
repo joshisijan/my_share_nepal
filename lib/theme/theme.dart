@@ -17,47 +17,47 @@ ThemeData kIndigoTheme = ThemeData.light().copyWith(
   ),
 );
 
-ThemeData kRedTheme = ThemeData.light().copyWith(
-  primaryColor: Color(0xfff44334),
-  primaryColorDark: Color(0xffb9000a),
-  primaryColorLight: Color(0xffff795f),
-  accentColor: Color(0xfff44334),
+ThemeData kCyanTheme = ThemeData.light().copyWith(
+  primaryColor: Color(0xff006064),
+  primaryColorDark: Color(0xff00363a),
+  primaryColorLight: Color(0xff428e92),
+  accentColor: Color(0xff006064),
   colorScheme: ColorScheme.light().copyWith(
-    primary: Color(0xfff44334),
-    primaryVariant: Color(0xffb9000a),
+    primary: Color(0xff006064),
+    primaryVariant: Color(0xff00363a),
     onPrimary: Color(0xffffffff),
-    secondary: Color(0xfff44334),
-    secondaryVariant: Color(0xffb9000a),
+    secondary: Color(0xff006064),
+    secondaryVariant: Color(0xff00363a),
     onSecondary: Color(0xffffffff),
   ),
 );
 
-ThemeData kPinkTheme = ThemeData.light().copyWith(
-  primaryColor: Color(0xffe91e63),
-  primaryColorDark: Color(0xffb0003a),
-  primaryColorLight: Color(0xffff6090),
-  accentColor: Color(0xffe91e63),
+ThemeData kBlueTheme = ThemeData.light().copyWith(
+  primaryColor: Color(0xff0d47a1),
+  primaryColorDark: Color(0xff002171),
+  primaryColorLight: Color(0xff5472d3),
+  accentColor: Color(0xff0d47a1),
   colorScheme: ColorScheme.light().copyWith(
-    primary: Color(0xffe91e63),
-    primaryVariant: Color(0xffb0003a),
+    primary: Color(0xff0d47a1),
+    primaryVariant: Color(0xff002171),
     onPrimary: Color(0xffffffff),
-    secondary: Color(0xffe91e63),
-    secondaryVariant: Color(0xffb0003a),
+    secondary: Color(0xff0d47a1),
+    secondaryVariant: Color(0xff002171),
     onSecondary: Color(0xffffffff),
   ),
 );
 
-ThemeData kGreenTheme = ThemeData.light().copyWith(
-  primaryColor: Color(0xff4caf50),
-  primaryColorDark: Color(0xff087f23),
-  primaryColorLight: Color(0xff80e27e),
-  accentColor: Color(0xff4caf50),
+ThemeData kDeepPurpleTheme = ThemeData.light().copyWith(
+  primaryColor: Color(0xff311b92),
+  primaryColorDark: Color(0xff000063),
+  primaryColorLight: Color(0xff6746c3),
+  accentColor: Color(0xff311b92),
   colorScheme: ColorScheme.light().copyWith(
-    primary: Color(0xff4caf50),
-    primaryVariant: Color(0xff087f23),
+    primary: Color(0xff311b92),
+    primaryVariant: Color(0xff000063),
     onPrimary: Color(0xffffffff),
-    secondary: Color(0xff4caf50),
-    secondaryVariant: Color(0xff087f23),
+    secondary: Color(0xff311b92),
+    secondaryVariant: Color(0xff000063),
     onSecondary: Color(0xffffffff),
   ),
 );

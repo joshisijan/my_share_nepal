@@ -44,6 +44,18 @@ class PortfolioTodayTab extends StatelessWidget {
         SymbolTab(
           symbol: 'UNL',
         ),
+        SymbolTab(
+          symbol: 'PTT',
+        ),
+        SymbolTab(
+          symbol: 'BLR',
+        ),
+        SymbolTab(
+          symbol: 'MAR',
+        ),
+        SymbolTab(
+          symbol: 'UNIAR64',
+        ),
         Divider(
           color: Theme.of(context).primaryColor,
         ),

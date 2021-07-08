@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/constants.dart';
+import 'package:my_share_nepal/widget/no_recent_search.dart';
 
 class SearchTab extends StatelessWidget {
   @override
@@ -17,6 +18,51 @@ class SearchTab extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
           ),
+          SizedBox(
+            height: kDefaultPadding,
+          ),
+          MaterialButton(
+            color: Theme.of(context).primaryColorLight,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(kDefaultBorderRadius * 2),
+            ),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: kDefaultPadding * 0.8),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Search...',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+                ),
+              ),
+            ),
+            onPressed: () {},
+          ),
+          SizedBox(
+            height: kDefaultPadding,
+          ),
+          Text(
+            'Recent search',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+            ),
+          ),
+          Wrap(
+            children: [
+              MaterialButton(
+                color: Theme.of(context).primaryColorLight,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+                ),
+                child: Icon(
+                  Icons.delete,
+                  color: Theme.of(context).primaryColorDark,
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+          NoRecentSearch(),
         ],
       ),
     );

@@ -29,9 +29,6 @@ class _AppState extends State<App> {
               color: Theme.of(context).primaryColorLight,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-                side: BorderSide(
-                  color: Theme.of(context).primaryColorDark,
-                ),
               ),
               onPressed: () {},
             )
