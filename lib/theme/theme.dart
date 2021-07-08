@@ -18,31 +18,46 @@ ThemeData kIndigoTheme = ThemeData.light().copyWith(
 );
 
 ThemeData kRedTheme = ThemeData.light().copyWith(
-  primaryColor: Color(0xffb71c1c),
-  primaryColorDark: Color(0xff7f0000),
-  primaryColorLight: Color(0xfff05545),
-  accentColor: Color(0xffb71c1c),
+  primaryColor: Color(0xfff44334),
+  primaryColorDark: Color(0xffb9000a),
+  primaryColorLight: Color(0xffff795f),
+  accentColor: Color(0xfff44334),
   colorScheme: ColorScheme.light().copyWith(
-    primary: Color(0xffb71c1c),
-    primaryVariant: Color(0xff7f0000),
+    primary: Color(0xfff44334),
+    primaryVariant: Color(0xffb9000a),
     onPrimary: Color(0xffffffff),
-    secondary: Color(0xffb71c1c),
-    secondaryVariant: Color(0xff7f0000),
+    secondary: Color(0xfff44334),
+    secondaryVariant: Color(0xffb9000a),
     onSecondary: Color(0xffffffff),
   ),
 );
 
-ThemeData kPurpleTheme = ThemeData.light().copyWith(
-  primaryColor: Color(0xff880e4f),
-  primaryColorDark: Color(0xff560027),
-  primaryColorLight: Color(0xffbc477b),
-  accentColor: Color(0xff880e4f),
+ThemeData kPinkTheme = ThemeData.light().copyWith(
+  primaryColor: Color(0xffe91e63),
+  primaryColorDark: Color(0xffb0003a),
+  primaryColorLight: Color(0xffff6090),
+  accentColor: Color(0xffe91e63),
   colorScheme: ColorScheme.light().copyWith(
-    primary: Color(0xff880e4f),
-    primaryVariant: Color(0xff560027),
+    primary: Color(0xffe91e63),
+    primaryVariant: Color(0xffb0003a),
     onPrimary: Color(0xffffffff),
-    secondary: Color(0xff880e4f),
-    secondaryVariant: Color(0xff560027),
+    secondary: Color(0xffe91e63),
+    secondaryVariant: Color(0xffb0003a),
+    onSecondary: Color(0xffffffff),
+  ),
+);
+
+ThemeData kGreenTheme = ThemeData.light().copyWith(
+  primaryColor: Color(0xff4caf50),
+  primaryColorDark: Color(0xff087f23),
+  primaryColorLight: Color(0xff80e27e),
+  accentColor: Color(0xff4caf50),
+  colorScheme: ColorScheme.light().copyWith(
+    primary: Color(0xff4caf50),
+    primaryVariant: Color(0xff087f23),
+    onPrimary: Color(0xffffffff),
+    secondary: Color(0xff4caf50),
+    secondaryVariant: Color(0xff087f23),
     onSecondary: Color(0xffffffff),
   ),
 );

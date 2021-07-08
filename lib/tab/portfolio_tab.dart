@@ -1,7 +1,17 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/constants.dart';
+import 'package:my_share_nepal/tab/portfolio_overall_tab.dart';
+import 'package:my_share_nepal/tab/portfolio_today_tab.dart';
 
-class PortfolioTab extends StatelessWidget {
+class PortfolioTab extends StatefulWidget {
+  @override
+  _PortfolioTabState createState() => _PortfolioTabState();
+}
+
+class _PortfolioTabState extends State<PortfolioTab> {
+  int tabIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,59 +30,67 @@ class PortfolioTab extends StatelessWidget {
           SizedBox(
             height: kDefaultPadding,
           ),
-          Container(
-            padding: EdgeInsets.all(kDefaultPadding),
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-            ),
+          DefaultTabController(
+            length: 2,
             child: Column(
               children: [
-                Text(
-                  'PORTFOLIO VALUE',
-                  style: Theme.of(context).textTheme.caption!.copyWith(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onPrimary
-                            .withAlpha(200),
+                TabBar(
+                  indicator: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+                  ),
+                  onTap: (index) {
+                    if (index == 0) {
+                      tabIndex = 0;
+                    } else {
+                      tabIndex = 1;
+                    }
+                    setState(() {});
+                  },
+                  tabs: [
+                    Tab(
+                      child: TextButton.icon(
+                        icon: Icon(
+                          Icons.today,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onPrimary
+                              .withAlpha(200),
+                        ),
+                        label: Text(
+                          'Today',
+                          style: TextStyle(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimary
+                                  .withAlpha(200)),
+                        ),
+                        onPressed: null,
                       ),
-                ),
-                SizedBox(
-                  height: kDefaultPadding / 4,
-                ),
-                Text(
-                  'Rs. 200,000,000',
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontWeight: FontWeight.bold,
+                    ),
+                    Tab(
+                      child: TextButton.icon(
+                        icon: Icon(
+                          Icons.bar_chart,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onPrimary
+                              .withAlpha(200),
+                        ),
+                        label: Text(
+                          'Overall',
+                          style: TextStyle(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimary
+                                  .withAlpha(200)),
+                        ),
+                        onPressed: null,
                       ),
-                ),
-                SizedBox(
-                  height: kDefaultPadding,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'OVERALL PROFIT/LOSS',
-                      style: Theme.of(context).textTheme.caption!.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimary
-                                .withAlpha(200),
-                          ),
-                    ),
-                    SizedBox(
-                      height: kDefaultPadding / 4,
-                    ),
-                    Text(
-                      'Rs. 200,000,000',
-                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
                     ),
                   ],
                 ),
+                tabIndex == 0 ? PortfolioTodayTab() : PortfolioOverallTab(),
               ],
             ),
           ),

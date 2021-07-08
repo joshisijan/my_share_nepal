@@ -42,5 +42,6 @@ class ThemeCubit extends Cubit<ThemeData> {
     emit(kThemeList[themeIndex]);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setInt('themeIndex', themeIndex);
+    sharedPreferences.setBool('isDark', false);
   }
 }

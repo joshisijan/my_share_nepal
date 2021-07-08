@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_share_nepal/constants.dart';
 import 'package:my_share_nepal/tab/home_tab.dart';
 import 'package:my_share_nepal/tab/portfolio_tab.dart';
 import 'package:my_share_nepal/tab/search_tab.dart';
@@ -12,20 +13,24 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final PageController _appBasePageController = PageController(
-    initialPage: 2,
+    initialPage: 0,
     keepPage: true,
   );
-  int _bottomNavigationBarIndex = 2;
+  int _bottomNavigationBarIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: _bottomNavigationBarIndex == 2
           ? MaterialButton(
-              color: Theme.of(context).primaryColor,
-              child: Text(
-                'Today\'s detail',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+              child: Icon(
+                Icons.add,
+                color: Theme.of(context).primaryColorDark,
+              ),
+              color: Theme.of(context).primaryColorLight,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+                side: BorderSide(
+                  color: Theme.of(context).primaryColorDark,
                 ),
               ),
               onPressed: () {},
