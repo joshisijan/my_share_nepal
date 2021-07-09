@@ -1,4 +1,5 @@
-class SymbolTodaysInfoModel {
+class SymbolModel {
+  int? id;
   final int sn;
   final String symbol;
   final double stockConfidence;
@@ -21,7 +22,8 @@ class SymbolTodaysInfoModel {
   final double fiftyTwoWeeksHigh;
   final double fiftyTwoWeeksLow;
 
-  SymbolTodaysInfoModel({
+  SymbolModel({
+    this.id,
     required this.sn,
     required this.symbol,
     required this.stockConfidence,
@@ -47,6 +49,7 @@ class SymbolTodaysInfoModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': null,
       'sn': sn,
       'symbol': symbol,
       'stockConfidence': stockConfidence,

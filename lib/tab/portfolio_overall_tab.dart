@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
+import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/reusable/symbol_tab.dart';
 
 class PortfolioOverallTab extends StatelessWidget {
+  final List<PortfolioModel> portfolios;
+
+  PortfolioOverallTab({
+    required this.portfolios,
+  });
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -94,20 +100,12 @@ class PortfolioOverallTab extends StatelessWidget {
             ],
           ),
         ),
-        SymbolTab(
-          symbol: 'NIFRA',
-        ),
-        SymbolTab(
-          symbol: 'HBN',
-        ),
-        SymbolTab(
-          symbol: 'JLI',
-        ),
-        SymbolTab(
-          symbol: 'RLI',
-        ),
-        SymbolTab(
-          symbol: 'UNL',
+        Column(
+          children: portfolios.map<Widget>((portfolio) {
+            return SymbolTab(
+              symbolModel: portfolio.symbolModel,
+            );
+          }).toList(),
         ),
         Divider(
           color: Theme.of(context).primaryColor,

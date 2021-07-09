@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
+import 'package:my_share_nepal/model/symbol_model.dart';
 
 class SymbolTab extends StatelessWidget {
-  final String symbol;
+  final SymbolModel? symbolModel;
   SymbolTab({
-    required this.symbol,
+    required this.symbolModel,
   });
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class SymbolTab extends StatelessWidget {
                 onPressed: () {},
               ),
               Text(
-                symbol,
+                symbolModel == null ? 'Error' : symbolModel!.symbol,
                 style: Theme.of(context).textTheme.subtitle1!.copyWith(
                       color: Theme.of(context)
                           .colorScheme

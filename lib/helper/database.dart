@@ -9,9 +9,16 @@ class AppDatabase {
       path,
       version: 1,
       onCreate: (Database db, int version) async {
-        String sqlCreateSymbolTodayInfo =
-            "CREATE TABLE SymbolTodaysInfo(id INTEGER PRIMARY KEY, sn INTEGER, symbol TEXT, stockConfidence REAL, open REAL, high REAL, low REAL, close REAL, vwap REAL, volume INTEGER, previousClose REAL, turnover REAL, transactions INTEGER, difference REAL, range REAL, differencePercentage REAL, rangePercentage REAL, vwapPercentage REAL, oneTwentyDays REAL, oneEightyDays REAL, fiftyTwoWeeksHigh REAL, fiftyTwoWeeksLow REAL)";
-        await db.execute(sqlCreateSymbolTodayInfo);
+        try {
+          String sqlCreateSymbol =
+              "CREATE TABLE Symbol(id INTEGER PRIMARY KEY, sn INTEGER, symbol TEXT, stockConfidence REAL, open REAL, high REAL, low REAL, close REAL, vwap REAL, volume INTEGER, previousClose REAL, turnover REAL, transactions INTEGER, difference REAL, range REAL, differencePercentage REAL, rangePercentage REAL, vwapPercentage REAL, oneTwentyDays REAL, oneEightyDays REAL, fiftyTwoWeeksHigh REAL, fiftyTwoWeeksLow REAL)";
+          String sqlCreatePortfolio =
+              "CREATE TABLE Portfolio(id INTEGER PRIMARY KEY, symbolId INTEGER, purchasePrice REAL, purchaseDate TEXT, FOREIGN KEY (symbolId) REFERENCES Symbol (id))";
+          await db.execute(sqlCreateSymbol);
+          await db.execute(sqlCreatePortfolio);
+        } catch (e) {
+          print(e.toString());
+        }
       },
     );
     return database;

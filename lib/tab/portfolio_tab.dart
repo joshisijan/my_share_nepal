@@ -1,20 +1,20 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
+import 'package:my_share_nepal/cubit/portfolio_state.dart';
+import 'package:my_share_nepal/cubit/portfolio_tab_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
-import 'package:my_share_nepal/model/symbol_todays_info.dart';
+import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/tab/portfolio_overall_tab.dart';
 import 'package:my_share_nepal/tab/portfolio_today_tab.dart';
-import 'package:my_share_nepal/widget/big_loading.dart';
+import 'package:my_share_nepal/widget/no_portfolio.dart';
 
-class PortfolioTab extends StatefulWidget {
-  @override
-  _PortfolioTabState createState() => _PortfolioTabState();
-}
-
-class _PortfolioTabState extends State<PortfolioTab> {
-  int tabIndex = 0;
+class PortfolioTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    int _tabIndex = context.watch<PortfolioTabCubit>().state;
+    context.read<PortfolioCubit>().getPortfolio();
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       color: Theme.of(context).primaryColorDark,
@@ -41,12 +41,7 @@ class _PortfolioTabState extends State<PortfolioTab> {
                     borderRadius: BorderRadius.circular(kDefaultBorderRadius),
                   ),
                   onTap: (index) {
-                    if (index == 0) {
-                      tabIndex = 0;
-                    } else {
-                      tabIndex = 1;
-                    }
-                    setState(() {});
+                    context.read<PortfolioTabCubit>().changeTab(index);
                   },
                   tabs: [
                     Tab(
@@ -91,21 +86,30 @@ class _PortfolioTabState extends State<PortfolioTab> {
                     ),
                   ],
                 ),
-                FutureBuilder(
-                  future: SymbolTodaysInfo().getSymbolTodaysInfo(),
-                  builder: (context, symbolTodayInfoSnapshot) {
-                    if (symbolTodayInfoSnapshot.connectionState !=
-                        ConnectionState.done) {
-                      return SizedBox();
-                    } else {
-                      return tabIndex == 0
-                          ? PortfolioTodayTab()
-                          : PortfolioOverallTab();
-                    }
-                  },
-                ),
               ],
             ),
+          ),
+          // main body starts from here
+          BlocBuilder<PortfolioCubit, PortfolioState>(
+            builder: (context, portfolioState) {
+              if (portfolioState is PortfolioLoading) {
+                return SizedBox.shrink();
+              } else if (portfolioState is PortfolioError) {
+                return BigError();
+              } else if (portfolioState is PortfolioEmpty) {
+                return NoPortfolio();
+              } else {
+                return _tabIndex == 0
+                    ? PortfolioTodayTab(
+                        portfolios:
+                            (portfolioState as PortfolioLoaded).portfolios,
+                      )
+                    : PortfolioOverallTab(
+                        portfolios:
+                            (portfolioState as PortfolioLoaded).portfolios,
+                      );
+              }
+            },
           ),
           SizedBox(
             height: kDefaultPadding,
