@@ -1,6 +1,5 @@
 class SymbolModel {
   int? id;
-  final int sn;
   final String symbol;
   final double stockConfidence;
   final double open;
@@ -17,14 +16,13 @@ class SymbolModel {
   final double differencePercentage;
   final double rangePercentage;
   final double vwapPercentage;
-  final double oneTwentyDays;
-  final double oneEightyDays;
+  final double? oneTwentyDays;
+  final double? oneEightyDays;
   final double fiftyTwoWeeksHigh;
   final double fiftyTwoWeeksLow;
 
   SymbolModel({
     this.id,
-    required this.sn,
     required this.symbol,
     required this.stockConfidence,
     required this.open,
@@ -49,7 +47,6 @@ class SymbolModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'sn': sn,
       'symbol': symbol,
       'stockConfidence': stockConfidence,
       'open': open,

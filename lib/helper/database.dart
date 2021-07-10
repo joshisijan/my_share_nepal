@@ -11,7 +11,7 @@ class AppDatabase {
       onCreate: (Database db, int version) async {
         try {
           String sqlCreateSymbol =
-              "CREATE TABLE Symbol(id INTEGER PRIMARY KEY, sn INTEGER, symbol TEXT, stockConfidence REAL, open REAL, high REAL, low REAL, close REAL, vwap REAL, volume INTEGER, previousClose REAL, turnover REAL, transactions INTEGER, difference REAL, range REAL, differencePercentage REAL, rangePercentage REAL, vwapPercentage REAL, oneTwentyDays REAL, oneEightyDays REAL, fiftyTwoWeeksHigh REAL, fiftyTwoWeeksLow REAL)";
+              "CREATE TABLE Symbol(id INTEGER PRIMARY KEY, symbol TEXT, stockConfidence REAL, open REAL, high REAL, low REAL, close REAL, vwap REAL, volume INTEGER, previousClose REAL, turnover REAL, transactions INTEGER, difference REAL, range REAL, differencePercentage REAL, rangePercentage REAL, vwapPercentage REAL, oneTwentyDays REAL, oneEightyDays REAL, fiftyTwoWeeksHigh REAL, fiftyTwoWeeksLow REAL)";
           String sqlCreatePortfolio =
               "CREATE TABLE Portfolio(id INTEGER PRIMARY KEY, symbolId INTEGER, purchasePrice REAL, quantity INTEGER, purchaseDate TEXT, FOREIGN KEY (symbolId) REFERENCES Symbol (id))";
           await db.execute(sqlCreateSymbol);

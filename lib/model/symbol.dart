@@ -16,7 +16,6 @@ class Symbol {
     return List.generate(symbols.length, (index) {
       return SymbolModel(
         id: symbols[index]['id'],
-        sn: symbols[index]['sn'],
         symbol: symbols[index]['symbol'],
         stockConfidence: symbols[index]['stockConfidence'],
         open: symbols[index]['open'],
@@ -49,7 +48,6 @@ class Symbol {
     if (symbol.length <= 0) return null;
     return SymbolModel(
       id: symbol[0]['id'],
-      sn: symbol[0]['sn'],
       symbol: symbol[0]['symbol'],
       stockConfidence: symbol[0]['stockConfidence'],
       open: symbol[0]['open'],
