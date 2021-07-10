@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/app.dart';
 import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
+import 'package:my_share_nepal/cubit/symbols_cubit.dart';
 import 'package:my_share_nepal/cubit/theme_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +19,9 @@ class AppBase extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => PortfolioCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SymbolsCubit(),
         ),
       ],
       child: AppBaseInternal(),

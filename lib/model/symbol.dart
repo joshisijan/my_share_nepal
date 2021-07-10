@@ -1,11 +1,32 @@
+import 'dart:convert';
+
+import 'package:my_share_nepal/helper/api.dart';
 import 'package:my_share_nepal/helper/database.dart';
+import 'package:my_share_nepal/helper/utilities.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:http/http.dart' as http;
 
 class Symbol {
   insertSymbol(SymbolModel symbolModel) async {
     Database db = await AppDatabase().openAppDatabase();
     db.insert('Symbol', symbolModel.toMap());
+    await db.close();
+  }
+
+  insertSymbols(List<SymbolModel> symbols) async {
+    Database db = await AppDatabase().openAppDatabase();
+    Batch batch = db.batch();
+    symbols.forEach((symbol) async {
+      List<Map<String, dynamic>> result = await db
+          .query('Symbol', where: 'symbol = ?', whereArgs: [symbol.symbol]);
+      if (result.length > 0)
+        batch.update('Symbol', symbol.toMap(),
+            where: 'symbol = ?', whereArgs: [symbol.symbol]);
+      else
+        batch.insert('Symbol', symbol.toMap());
+    });
+    await batch.commit();
     await db.close();
   }
 
@@ -69,5 +90,46 @@ class Symbol {
       fiftyTwoWeeksHigh: symbol[0]['fiftyTwoWeeksHigh'],
       fiftyTwoWeeksLow: symbol[0]['fiftyTwoWeeksLow'],
     );
+  }
+
+  fetchSymbols() async {
+    http.Response response = await http.get(Uri.parse(kTodaysDetailUrl));
+    if (response.statusCode == 200) {
+      var jsonData = await jsonDecode(response.body);
+      List<SymbolModel> symbols = [];
+      jsonData.forEach((symbolData) {
+        SymbolModel symbolModel = SymbolModel(
+          symbol: symbolData['symbol'],
+          open: stringToDouble(symbolData['open']),
+          close: stringToDouble(symbolData['close']),
+          high: stringToDouble(symbolData['high']),
+          low: stringToDouble(symbolData['low']),
+          turnover: stringToDouble(symbolData['turnover']),
+          difference: stringToDouble(symbolData['difference']),
+          differencePercentage:
+              stringToDouble(symbolData['differencePercentage']),
+          range: stringToDouble(symbolData['range']),
+          rangePercentage: stringToDouble(symbolData['rangePercentage']),
+          vwap: stringToDouble(symbolData['vwap']),
+          vwapPercentage: stringToDouble(symbolData['vwapPercentage']),
+          previousClose: stringToDouble(symbolData['previousClose']),
+          stockConfidence: stringToDouble(symbolData['stockConfidence']),
+          fiftyTwoWeeksHigh: stringToDouble(symbolData['fiftyTwoWeeksHigh']),
+          fiftyTwoWeeksLow: stringToDouble(symbolData['fiftyTwoWeeksLow']),
+          oneTwentyDays: symbolData['oneTwentyDays'] == '-'
+              ? null
+              : stringToDouble(symbolData['oneTwentyDays']),
+          oneEightyDays: symbolData['oneEightyDays'] == '-'
+              ? null
+              : stringToDouble(symbolData['oneEightyDays']),
+          volume: stringToDouble(symbolData['volume']).toInt(),
+          transactions: stringToDouble(symbolData['transactions']).toInt(),
+        );
+        symbols.add(symbolModel);
+      });
+      await insertSymbols(symbols);
+    } else {
+      throw Error();
+    }
   }
 }
