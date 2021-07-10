@@ -10,24 +10,31 @@ class PortfolioCubit extends Cubit<PortfolioState> {
 
   getPortfolio() async {
     try {
-      emit(PortfolioLoading());
+      if (state is PortfolioInitial) emit(PortfolioLoading());
       List<PortfolioModel> portfolios = await Portfolio().getPortfolio();
-      if (portfolios.isEmpty) {
-        emit(PortfolioEmpty());
-      } else {
-        for (int i = 0; i < portfolios.length; i++) {
-          SymbolModel? symbolModel =
-              await Symbol().getSymbol(portfolios[i].symbolId);
-          if (symbolModel != null) {
-            portfolios[i].symbolModel = symbolModel;
-          }
+      for (int i = 0; i < portfolios.length; i++) {
+        SymbolModel? symbolModel =
+            await Symbol().getSymbol(portfolios[i].symbolId);
+        if (symbolModel != null) {
+          portfolios[i].symbolModel = symbolModel;
         }
-        emit(PortfolioLoaded(
-          portfolios: portfolios,
-        ));
       }
+      emit(PortfolioLoaded(
+        portfolios: [...portfolios],
+      ));
     } catch (e) {
+      print(e.toString());
       emit(PortfolioError());
     }
+  }
+
+  insertSymbol(PortfolioModel portfolioModel) async {
+    await Portfolio().insertPortfolio(portfolioModel);
+    getPortfolio();
+  }
+
+  removeSymbol(int id) async {
+    await Portfolio().deleteSymbol(id);
+    getPortfolio();
   }
 }

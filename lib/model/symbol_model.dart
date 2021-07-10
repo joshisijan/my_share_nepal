@@ -49,7 +49,6 @@ class SymbolModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': null,
       'sn': sn,
       'symbol': symbol,
       'stockConfidence': stockConfidence,

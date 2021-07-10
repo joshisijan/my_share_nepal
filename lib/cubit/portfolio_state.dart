@@ -8,12 +8,10 @@ class PortfolioError extends PortfolioState {}
 
 class PortfolioLoading extends PortfolioState {}
 
-class PortfolioEmpty extends PortfolioState {}
-
 class PortfolioLoaded extends PortfolioState {
-  final List<PortfolioModel> portfolios;
+  List<PortfolioModel> portfolios;
 
   PortfolioLoaded({
-    required this.portfolios,
-  });
+    portfolios,
+  }) : portfolios = portfolios ?? [];
 }

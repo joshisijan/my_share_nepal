@@ -104,6 +104,7 @@ class PortfolioOverallTab extends StatelessWidget {
           children: portfolios.map<Widget>((portfolio) {
             return SymbolTab(
               symbolModel: portfolio.symbolModel,
+              id: portfolio.id,
             );
           }).toList(),
         ),

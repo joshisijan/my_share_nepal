@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/reusable/symbol_tab.dart';
-import 'package:my_share_nepal/model/symbol.dart';
 
 class PortfolioTodayTab extends StatelessWidget {
   final List<PortfolioModel> portfolios;
@@ -40,6 +39,7 @@ class PortfolioTodayTab extends StatelessWidget {
           children: portfolios.map<Widget>((portfolio) {
             return SymbolTab(
               symbolModel: portfolio.symbolModel,
+              id: portfolio.id,
             );
           }).toList(),
         ),

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SymbolTab extends StatelessWidget {
   final SymbolModel? symbolModel;
+  final int? id;
   SymbolTab({
     required this.symbolModel,
+    required this.id,
   });
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,9 @@ class SymbolTab extends StatelessWidget {
                   Icons.remove_circle,
                   color: Theme.of(context).primaryColorLight,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  context.read<PortfolioCubit>().removeSymbol(id ?? 1);
+                },
               ),
               Text(
                 symbolModel == null ? 'Error' : symbolModel!.symbol,
