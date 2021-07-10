@@ -5,12 +5,17 @@ import 'package:my_share_nepal/reusable/symbol_tab.dart';
 
 class PortfolioTodayTab extends StatelessWidget {
   final List<PortfolioModel> portfolios;
-
   PortfolioTodayTab({
     required this.portfolios,
   });
   @override
   Widget build(BuildContext context) {
+    double changePercentage = 0.0;
+    for (int i = 0; i < portfolios.length; i++) {
+      if (portfolios[i].symbolModel != null) {
+        changePercentage += portfolios[i].symbolModel!.differencePercentage;
+      }
+    }
     return Column(
       children: [
         SizedBox(
@@ -20,14 +25,32 @@ class PortfolioTodayTab extends StatelessWidget {
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             Icon(
-              Icons.arrow_upward,
+              changePercentage < 0
+                  ? Icons.arrow_downward
+                  : changePercentage == 0
+                      ? Icons.lunch_dining
+                      : Icons.arrow_upward,
               size: Theme.of(context).textTheme.headline4!.fontSize,
-              color: Colors.green,
+              color: changePercentage < 0
+                  ? Colors.red
+                  : changePercentage == 0
+                      ? Theme.of(context).colorScheme.onPrimary.withAlpha(150)
+                      : Colors.green,
             ),
             Text(
-              '2.80%',
+              changePercentage < 0
+                  ? (changePercentage * -1).toStringAsFixed(2) + '%'
+                  : changePercentage.toStringAsFixed(2) + '%',
               style: Theme.of(context).textTheme.headline2!.copyWith(
-                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                    color: changePercentage < 0
+                        ? Colors.red
+                        : changePercentage == 0
+                            ? Theme.of(context)
+                                .colorScheme
+                                .onPrimary
+                                .withAlpha(150)
+                            : Colors.green,
                   ),
             ),
           ],

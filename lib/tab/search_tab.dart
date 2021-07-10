@@ -63,6 +63,9 @@ class SearchTab extends StatelessWidget {
             ],
           ),
           NoRecentSearch(),
+          SizedBox(
+            height: kDefaultPadding * 2,
+          ),
         ],
       ),
     );

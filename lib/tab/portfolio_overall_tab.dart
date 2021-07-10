@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/reusable/symbol_tab.dart';
@@ -9,8 +10,23 @@ class PortfolioOverallTab extends StatelessWidget {
   PortfolioOverallTab({
     required this.portfolios,
   });
+
+  final NumberFormat numberFormat =
+      NumberFormat("##,##,##,##,##,##,##,###0.0#", "en_US");
   @override
   Widget build(BuildContext context) {
+    double value = 0;
+    double investment = 0;
+    double change = 0;
+    double changePercentage = 0;
+    for (int i = 0; i < portfolios.length; i++) {
+      if (portfolios[i].symbolModel != null) {
+        value += portfolios[i].symbolModel!.close * portfolios[i].quantity;
+        investment += portfolios[i].quantity * portfolios[i].purchasePrice;
+      }
+    }
+    change = value - investment;
+    changePercentage = change / investment * 100;
     return Column(
       children: [
         SizedBox(
@@ -20,14 +36,32 @@ class PortfolioOverallTab extends StatelessWidget {
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             Icon(
-              Icons.arrow_downward,
+              changePercentage < 0
+                  ? Icons.arrow_downward
+                  : changePercentage == 0
+                      ? Icons.lunch_dining
+                      : Icons.arrow_upward,
               size: Theme.of(context).textTheme.headline4!.fontSize,
-              color: Colors.red,
+              color: changePercentage < 0
+                  ? Colors.red
+                  : changePercentage == 0
+                      ? Theme.of(context).colorScheme.onPrimary.withAlpha(200)
+                      : Colors.green,
             ),
             Text(
-              '10.80%',
+              changePercentage < 0
+                  ? (changePercentage * -1).toStringAsFixed(2) + '%'
+                  : changePercentage.toStringAsFixed(2) + '%',
               style: Theme.of(context).textTheme.headline2!.copyWith(
-                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    color: changePercentage < 0
+                        ? Colors.red
+                        : changePercentage == 0
+                            ? Theme.of(context)
+                                .colorScheme
+                                .onPrimary
+                                .withAlpha(200)
+                            : Colors.green,
                   ),
             ),
           ],
@@ -36,7 +70,7 @@ class PortfolioOverallTab extends StatelessWidget {
           height: kDefaultPadding,
         ),
         Text(
-          'Rs. 22,65,111.22',
+          'Rs. ' + numberFormat.format(value),
           style: Theme.of(context).textTheme.headline5!.copyWith(
                 color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
                 fontWeight: FontWeight.bold,
@@ -52,16 +86,28 @@ class PortfolioOverallTab extends StatelessWidget {
           height: kDefaultPadding,
         ),
         Text(
-          'Rs. 65,111.22',
+          'Rs. ' + numberFormat.format(change),
           style: Theme.of(context).textTheme.headline5!.copyWith(
-                color: Colors.green,
+                color: change > 0
+                    ? Colors.green
+                    : change == 0
+                        ? Theme.of(context).colorScheme.onPrimary.withAlpha(200)
+                        : Colors.red,
                 fontWeight: FontWeight.bold,
               ),
         ),
         Text(
-          'profit',
+          change > 0
+              ? 'Profit'
+              : change == 0
+                  ? 'hh'
+                  : 'Loss',
           style: Theme.of(context).textTheme.overline!.copyWith(
-                color: Colors.green,
+                color: change > 0
+                    ? Colors.green
+                    : change == 0
+                        ? Theme.of(context).colorScheme.onPrimary.withAlpha(150)
+                        : Colors.red,
               ),
         ),
         SizedBox(

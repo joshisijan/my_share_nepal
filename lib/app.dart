@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
-import 'package:my_share_nepal/cubit/symbols_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
-import 'package:my_share_nepal/model/portfolio_model.dart';
+import 'package:my_share_nepal/screen/search_page.dart';
 import 'package:my_share_nepal/tab/home_tab.dart';
 import 'package:my_share_nepal/tab/portfolio_tab.dart';
 import 'package:my_share_nepal/tab/search_tab.dart';
 import 'package:my_share_nepal/tab/setting_tab.dart';
 import 'package:my_share_nepal/tab/tools_tab.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_share_nepal/widget/bottom_fetching_indicator.dart';
 
 class App extends StatefulWidget {
   @override
@@ -35,31 +33,39 @@ class _AppState extends State<App> {
                 borderRadius: BorderRadius.circular(kDefaultBorderRadius),
               ),
               onPressed: () async {
-                context.read<PortfolioCubit>().insertSymbol(PortfolioModel(
-                      symbolId: 3,
-                      purchaseDate: DateTime.now(),
-                      quantity: 10,
-                      purchasePrice: 200.2,
-                    ));
+                showSearch(
+                  context: context,
+                  delegate: SearchPage(),
+                );
               },
             )
           : null,
-      body: PageView(
-        controller: _appBasePageController,
-        physics: NeverScrollableScrollPhysics(),
-        onPageChanged: (pageIndex) {
-          if (pageIndex != _bottomNavigationBarIndex) {
-            setState(() {
-              _bottomNavigationBarIndex = pageIndex;
-            });
-          }
-        },
+      body: Stack(
         children: [
-          HomeTab(),
-          SearchTab(),
-          PortfolioTab(),
-          ToolsTab(),
-          SettingTab()
+          PageView(
+            controller: _appBasePageController,
+            physics: NeverScrollableScrollPhysics(),
+            onPageChanged: (pageIndex) {
+              if (pageIndex != _bottomNavigationBarIndex) {
+                setState(() {
+                  _bottomNavigationBarIndex = pageIndex;
+                });
+              }
+            },
+            children: [
+              HomeTab(),
+              SearchTab(),
+              PortfolioTab(),
+              ToolsTab(),
+              SettingTab()
+            ],
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: BottomFetchingIndicator(),
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

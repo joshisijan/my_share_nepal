@@ -159,6 +159,9 @@ class _SettingTabState extends State<SettingTab> {
               ],
             ),
           ),
+          SizedBox(
+            height: kDefaultPadding * 2,
+          ),
         ],
       ),
     );

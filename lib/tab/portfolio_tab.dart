@@ -122,7 +122,7 @@ class _PortfolioTabState extends State<PortfolioTab> {
             },
           ),
           SizedBox(
-            height: kDefaultPadding,
+            height: kDefaultPadding * 2,
           ),
         ],
       ),

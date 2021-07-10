@@ -15,3 +15,13 @@ class SymbolsLoaded extends SymbolsState {
     symbols,
   }) : symbols = symbols ?? [];
 }
+
+class SymbolsFetchLoading extends SymbolsState {}
+
+class SymbolsFetchError extends SymbolsState {}
+
+class SymbolsFetchErrorEnd extends SymbolsState {}
+
+class SymbolsFetchLoaded extends SymbolsState {}
+
+class SymbolsFetchLoadedEnd extends SymbolsState {}

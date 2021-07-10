@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
@@ -11,6 +12,8 @@ class SymbolTab extends StatelessWidget {
     required this.symbolModel,
     required this.id,
   });
+  final NumberFormat numberFormat =
+      NumberFormat("##,##,##,##,##,##,##,###0.0#", "en_US");
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,6 +41,7 @@ class SymbolTab extends StatelessWidget {
                           .colorScheme
                           .onPrimary
                           .withAlpha(200),
+                      fontWeight: FontWeight.bold,
                     ),
               ),
               SizedBox(
@@ -50,13 +54,16 @@ class SymbolTab extends StatelessWidget {
                   runAlignment: WrapAlignment.spaceAround,
                   children: [
                     Text(
-                      '2,00,000.0',
+                      symbolModel == null
+                          ? 'Error'
+                          : numberFormat.format(symbolModel!.close),
                       textAlign: TextAlign.end,
                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
                                 .onPrimary
                                 .withAlpha(200),
+                            fontWeight: FontWeight.bold,
                           ),
                     ),
                     SizedBox(
@@ -76,17 +83,53 @@ class SymbolTab extends StatelessWidget {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           Icon(
-                            Icons.arrow_upward,
+                            symbolModel == null
+                                ? Icons.arrow_upward
+                                : symbolModel!.differencePercentage < 0
+                                    ? Icons.arrow_downward
+                                    : symbolModel!.differencePercentage == 0
+                                        ? Icons.lunch_dining
+                                        : Icons.arrow_upward,
                             size:
                                 Theme.of(context).textTheme.bodyText2!.fontSize,
-                            color: Colors.green,
+                            color: symbolModel == null
+                                ? Colors.green
+                                : symbolModel!.differencePercentage < 0
+                                    ? Colors.red
+                                    : symbolModel!.differencePercentage == 0
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary
+                                            .withAlpha(200)
+                                        : Colors.green,
                           ),
                           Text(
-                            '1.80%',
-                            style:
-                                Theme.of(context).textTheme.bodyText1!.copyWith(
-                                      color: Colors.green,
-                                    ),
+                            symbolModel == null
+                                ? 'Error'
+                                : symbolModel!.differencePercentage < 0
+                                    ? (symbolModel!.differencePercentage * -1)
+                                            .toStringAsFixed(2) +
+                                        '%'
+                                    : symbolModel!.differencePercentage
+                                            .toStringAsFixed(2) +
+                                        '%',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: symbolModel == null
+                                      ? Colors.green
+                                      : symbolModel!.differencePercentage < 0
+                                          ? Colors.red
+                                          : symbolModel!.differencePercentage ==
+                                                  0
+                                              ? Theme.of(context)
+                                                  .colorScheme
+                                                  .onPrimary
+                                                  .withAlpha(200)
+                                              : Colors.green,
+                                ),
                           ),
                         ],
                       ),

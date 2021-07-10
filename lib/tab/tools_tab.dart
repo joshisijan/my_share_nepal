@@ -43,6 +43,9 @@ class ToolsTab extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(
+            height: kDefaultPadding * 2,
+          ),
         ],
       ),
     );

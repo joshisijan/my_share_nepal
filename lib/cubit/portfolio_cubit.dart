@@ -9,6 +9,7 @@ class PortfolioCubit extends Cubit<PortfolioState> {
   PortfolioCubit() : super(PortfolioInitial());
 
   getPortfolio() async {
+    if (state is PortfolioLoading) return;
     try {
       if (state is PortfolioInitial) emit(PortfolioLoading());
       List<PortfolioModel> portfolios = await Portfolio().getPortfolio();

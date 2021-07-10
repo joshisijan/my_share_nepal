@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_share_nepal/cubit/symbols_cubit.dart';
+import 'package:my_share_nepal/cubit/symbols_state.dart';
+import 'package:my_share_nepal/reusable/small_bottom_notification.dart';
+
+class BottomFetchingIndicator extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SymbolsCubit, SymbolsState>(
+      builder: (context, symbolsState) {
+        if (symbolsState is SymbolsFetchLoading) {
+          return SmallBottomNotification(
+            title: 'Fetching latest data',
+          );
+        } else if (symbolsState is SymbolsFetchError) {
+          return SmallBottomNotification(
+            title: 'Error fetching latest data',
+          );
+        } else if (symbolsState is SymbolsFetchLoaded) {
+          return SmallBottomNotification(
+              title: 'Latest data fetched successfully');
+        } else {
+          return SizedBox.shrink();
+        }
+      },
+    );
+  }
+}
