@@ -21,6 +21,12 @@ class SymbolsCubit extends Cubit<SymbolsState> {
     }
   }
 
+  autoFetchSymbols() async {
+    await fetchSymbols();
+    await Future.delayed(Duration(minutes: 2));
+    autoFetchSymbols();
+  }
+
   getSymbols() async {
     if (state is SymbolsLoading) return;
     try {

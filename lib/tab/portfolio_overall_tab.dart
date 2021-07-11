@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
+import 'package:my_share_nepal/reusable/custom_button_on_dark.dart';
 import 'package:my_share_nepal/reusable/portfolio_symbol_tile.dart';
 
 class PortfolioOverallTab extends StatelessWidget {
@@ -118,29 +119,17 @@ class PortfolioOverallTab extends StatelessWidget {
           child: Wrap(
             alignment: WrapAlignment.start,
             children: [
-              MaterialButton(
-                color: Theme.of(context).primaryColorLight,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-                ),
-                child: Icon(
-                  Icons.summarize,
-                  color: Theme.of(context).primaryColorDark,
-                ),
+              CustomButtonOnDark(
+                isIconButton: true,
+                icon: Icons.summarize,
                 onPressed: () {},
               ),
               SizedBox(
                 width: kDefaultPadding / 2,
               ),
-              MaterialButton(
-                color: Theme.of(context).primaryColorLight,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-                ),
-                child: Icon(
-                  Icons.insights,
-                  color: Theme.of(context).primaryColorDark,
-                ),
+              CustomButtonOnDark(
+                isIconButton: true,
+                icon: Icons.insights,
                 onPressed: () {},
               ),
             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
+import 'package:my_share_nepal/reusable/custom_button_on_dark.dart';
 import 'package:my_share_nepal/reusable/custom_popup_menu_item.dart';
 
 class SearchSymbolTile extends StatelessWidget {
@@ -75,20 +76,9 @@ class SearchSymbolTile extends StatelessWidget {
                         ];
                       },
                     )
-                  : MaterialButton(
-                      elevation: 0.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(kDefaultBorderRadius),
-                      ),
-                      color: Theme.of(context).primaryColorLight,
-                      child: Icon(
-                        Icons.add,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onPrimary
-                            .withAlpha(200),
-                      ),
+                  : CustomButtonOnDark(
+                      isIconButton: true,
+                      icon: Icons.add,
                       onPressed: onAdd,
                     ),
             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
+import 'package:my_share_nepal/reusable/custom_button_on_dark.dart';
 import 'package:my_share_nepal/screen/search_page.dart';
 import 'package:my_share_nepal/widget/no_recent_search.dart';
 
@@ -57,15 +58,9 @@ class SearchTab extends StatelessWidget {
           ),
           Wrap(
             children: [
-              MaterialButton(
-                color: Theme.of(context).primaryColorLight,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-                ),
-                child: Icon(
-                  Icons.delete,
-                  color: Theme.of(context).primaryColorDark,
-                ),
+              CustomButtonOnDark(
+                isIconButton: true,
+                icon: Icons.delete,
                 onPressed: () {},
               ),
             ],

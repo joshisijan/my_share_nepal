@@ -7,7 +7,9 @@ import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/reusable/big_loading.dart';
+import 'package:my_share_nepal/reusable/custom_button_on_dark.dart';
 import 'package:my_share_nepal/reusable/search_symbol_tile.dart';
+import 'package:my_share_nepal/widget/no_search_result.dart';
 
 class SearchPage extends SearchDelegate {
   final int searchIndex;
@@ -45,21 +47,8 @@ class SearchPage extends SearchDelegate {
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: MaterialButton(
-                    elevation: 0.0,
-                    color: Theme.of(context).primaryColorLight,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-                    ),
-                    child: Text(
-                      'Show all',
-                      style: TextStyle(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onPrimary
-                            .withAlpha(200),
-                      ),
-                    ),
+                  child: CustomButtonOnDark(
+                    text: 'Show all',
                     onPressed: () {
                       query = '';
                       showResults(context);
@@ -93,6 +82,9 @@ class SearchPage extends SearchDelegate {
               } else if (symbolsState is SymbolsFindError) {
                 return BigError();
               } else if (symbolsState is SymbolsFindLoaded) {
+                if (symbolsState.symbols.length <= 0) {
+                  return NoSearchResult();
+                }
                 return Column(
                   children: symbolsState.symbols.map<Widget>((symbol) {
                         return SearchSymbolTile(

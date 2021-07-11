@@ -8,7 +8,9 @@ class SmallBottomNotification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).primaryColorLight,
+      color: Theme.of(context).brightness == Brightness.dark
+          ? Theme.of(context).buttonColor
+          : Theme.of(context).primaryColorLight,
       padding: EdgeInsets.all(2.0),
       child: Text(
         this.title,
