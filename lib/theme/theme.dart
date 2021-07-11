@@ -15,6 +15,11 @@ ThemeData kIndigoTheme = ThemeData.light().copyWith(
     secondaryVariant: Color(0xff000051),
     onSecondary: Color(0xffffffff),
   ),
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: Color(0xff534bae),
+    selectionColor: Color(0xff534bae),
+    selectionHandleColor: Color(0xff534bae),
+  ),
 );
 
 ThemeData kCyanTheme = ThemeData.light().copyWith(
@@ -29,6 +34,11 @@ ThemeData kCyanTheme = ThemeData.light().copyWith(
     secondary: Color(0xff006064),
     secondaryVariant: Color(0xff00363a),
     onSecondary: Color(0xffffffff),
+  ),
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: Color(0xff428e92),
+    selectionColor: Color(0xff428e92),
+    selectionHandleColor: Color(0xff428e92),
   ),
 );
 
@@ -45,6 +55,11 @@ ThemeData kBlueTheme = ThemeData.light().copyWith(
     secondaryVariant: Color(0xff002171),
     onSecondary: Color(0xffffffff),
   ),
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: Color(0xff5472d3),
+    selectionColor: Color(0xff5472d3),
+    selectionHandleColor: Color(0xff5472d3),
+  ),
 );
 
 ThemeData kDeepPurpleTheme = ThemeData.light().copyWith(
@@ -59,5 +74,10 @@ ThemeData kDeepPurpleTheme = ThemeData.light().copyWith(
     secondary: Color(0xff311b92),
     secondaryVariant: Color(0xff000063),
     onSecondary: Color(0xffffffff),
+  ),
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: Color(0xff6746c3),
+    selectionColor: Color(0xff6746c3),
+    selectionHandleColor: Color(0xff6746c3),
   ),
 );

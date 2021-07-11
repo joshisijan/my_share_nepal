@@ -13,18 +13,18 @@ class PortfolioRemoveDialog extends StatelessWidget {
 
   final NumberFormat numberFormat =
       NumberFormat("##,##,##,##,##,##,##,###0.0#", "en_US");
-  final DateFormat dateFormat = DateFormat.yMMMMd('en_US').add_jm();
+  final DateFormat dateFormat = DateFormat.yMMMMd('en_US');
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Theme.of(context).primaryColorLight,
+      backgroundColor: Theme.of(context).primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
       ),
       title: Text(
         'Remove from portfolio?',
         style: TextStyle(
-            color: Theme.of(context).colorScheme.onPrimary.withAlpha(200)),
+            color: Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
       ),
       content: RichText(
         text: TextSpan(
@@ -33,7 +33,7 @@ class PortfolioRemoveDialog extends StatelessWidget {
               text: 'Symbol',
               style: Theme.of(context).textTheme.caption!.copyWith(
                   color:
-                      Theme.of(context).colorScheme.onPrimary.withAlpha(200)),
+                      Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
             ),
             TextSpan(
               text: '\n' +
@@ -41,20 +41,20 @@ class PortfolioRemoveDialog extends StatelessWidget {
                       ? 'Error'
                       : portfolioModel.symbolModel!.symbol),
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+                color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
                 fontWeight: FontWeight.bold,
               ),
             ),
             TextSpan(
-              text: '\n\nQuantity',
+              text: '\n\nNo. of share',
               style: Theme.of(context).textTheme.caption!.copyWith(
                   color:
-                      Theme.of(context).colorScheme.onPrimary.withAlpha(200)),
+                      Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
             ),
             TextSpan(
               text: '\n' + (portfolioModel.quantity.toString()),
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+                color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -62,12 +62,12 @@ class PortfolioRemoveDialog extends StatelessWidget {
               text: '\n\nPurchase Price',
               style: Theme.of(context).textTheme.caption!.copyWith(
                   color:
-                      Theme.of(context).colorScheme.onPrimary.withAlpha(200)),
+                      Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
             ),
             TextSpan(
               text: '\n' + numberFormat.format(portfolioModel.purchasePrice),
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+                color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -75,12 +75,12 @@ class PortfolioRemoveDialog extends StatelessWidget {
               text: '\n\nPurchase Date',
               style: Theme.of(context).textTheme.caption!.copyWith(
                   color:
-                      Theme.of(context).colorScheme.onPrimary.withAlpha(200)),
+                      Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
             ),
             TextSpan(
               text: '\n' + dateFormat.format(portfolioModel.purchaseDate),
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+                color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -90,12 +90,12 @@ class PortfolioRemoveDialog extends StatelessWidget {
       actions: [
         IconButton(
           icon: Icon(Icons.check,
-              color: Theme.of(context).colorScheme.onPrimary.withAlpha(200)),
+              color: Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
           onPressed: onRemove,
         ),
         IconButton(
           icon: Icon(Icons.close,
-              color: Theme.of(context).colorScheme.onPrimary.withAlpha(200)),
+              color: Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
           onPressed: () {
             Navigator.pop(context);
           },

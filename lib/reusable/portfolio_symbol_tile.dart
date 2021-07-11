@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
+import 'package:my_share_nepal/helper/utilities.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,6 +43,11 @@ class PortfolioSymbolTile extends StatelessWidget {
                         onRemove: () {
                           context.read<PortfolioCubit>().removeSymbol(id ?? 0);
                           Navigator.pop(context);
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(normalSnackBar(
+                            context,
+                            'Successfully emoved from portfolio.',
+                          ));
                         },
                       );
                     },

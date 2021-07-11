@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_share_nepal/cubit/symbols_cubit.dart';
-import 'package:my_share_nepal/helper/constants.dart';
-import 'package:my_share_nepal/reusable/custom_button_on_dark.dart';
+import 'package:my_share_nepal/reusable/custom_button.dart';
 import 'package:my_share_nepal/screen/search_page.dart';
 import 'package:my_share_nepal/tab/home_tab.dart';
 import 'package:my_share_nepal/tab/portfolio_tab.dart';
@@ -9,7 +7,6 @@ import 'package:my_share_nepal/tab/search_tab.dart';
 import 'package:my_share_nepal/tab/setting_tab.dart';
 import 'package:my_share_nepal/tab/tools_tab.dart';
 import 'package:my_share_nepal/widget/bottom_fetching_indicator.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class App extends StatefulWidget {
   @override
@@ -35,7 +32,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: _bottomNavigationBarIndex == 2
-          ? CustomButtonOnDark(
+          ? CustomButton(
               isIconButton: true,
               icon: Icons.add,
               onPressed: () {

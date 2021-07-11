@@ -13,12 +13,12 @@ class CustomPopupMenuItem extends StatelessWidget {
       label: Text(
         title,
         style: TextStyle(
-          color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+          color: Theme.of(context).primaryColorDark,
         ),
       ),
       icon: Icon(
         icon,
-        color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+        color: Theme.of(context).primaryColorDark,
       ),
       onPressed: null,
     );

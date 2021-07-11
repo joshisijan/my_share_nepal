@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
-import 'package:my_share_nepal/reusable/custom_button_on_dark.dart';
+import 'package:my_share_nepal/reusable/custom_button.dart';
 import 'package:my_share_nepal/screen/search_page.dart';
 import 'package:my_share_nepal/widget/no_recent_search.dart';
 
@@ -58,7 +58,7 @@ class SearchTab extends StatelessWidget {
           ),
           Wrap(
             children: [
-              CustomButtonOnDark(
+              CustomButton(
                 isIconButton: true,
                 icon: Icons.delete,
                 onPressed: () {},

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 
-class CustomButtonOnDark extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final bool isIconButton;
   final IconData? icon;
   final String? text;
   final Function() onPressed;
-  CustomButtonOnDark({
+  CustomButton({
     this.isIconButton = false,
     this.icon,
     this.text,

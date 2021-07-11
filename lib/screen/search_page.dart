@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
 import 'package:my_share_nepal/cubit/symbols_cubit.dart';
 import 'package:my_share_nepal/cubit/symbols_state.dart';
 import 'package:my_share_nepal/helper/constants.dart';
-import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/reusable/big_loading.dart';
-import 'package:my_share_nepal/reusable/custom_button_on_dark.dart';
+import 'package:my_share_nepal/reusable/custom_button.dart';
 import 'package:my_share_nepal/reusable/search_symbol_tile.dart';
+import 'package:my_share_nepal/widget/add_portfolio_dialog.dart';
 import 'package:my_share_nepal/widget/no_search_result.dart';
 
 class SearchPage extends SearchDelegate {
@@ -20,7 +19,10 @@ class SearchPage extends SearchDelegate {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: Icon(
+          Icons.clear,
+          color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
+        ),
         onPressed: () {
           query = '';
         },
@@ -31,7 +33,7 @@ class SearchPage extends SearchDelegate {
   @override
   Widget buildLeading(BuildContext context) {
     return BackButton(
-      color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+      color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
     );
   }
 
@@ -40,14 +42,13 @@ class SearchPage extends SearchDelegate {
     return query == ''
         ? Container(
             width: double.maxFinite,
-            color: Theme.of(context).primaryColor,
             padding: EdgeInsets.symmetric(
                 horizontal: kDefaultPadding, vertical: kDefaultPadding / 2),
             child: Column(
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: CustomButtonOnDark(
+                  child: CustomButton(
                     text: 'Show all',
                     onPressed: () {
                       query = '';
@@ -70,7 +71,6 @@ class SearchPage extends SearchDelegate {
     }
     context.read<SymbolsCubit>().findSymbols(query);
     return Container(
-      color: Theme.of(context).primaryColor,
       child: ListView(
         children: [
           BlocBuilder<SymbolsCubit, SymbolsState>(
@@ -91,15 +91,12 @@ class SearchPage extends SearchDelegate {
                           searchIndex: searchIndex,
                           title: symbol.symbol,
                           onAdd: () {
-                            context
-                                .read<PortfolioCubit>()
-                                .insertSymbol(PortfolioModel(
-                                  symbolModel: symbol,
-                                  purchaseDate: DateTime.now(),
-                                  purchasePrice: 200.22,
-                                  quantity: 100,
-                                  symbolId: symbol.id ?? 0,
-                                ));
+                            showDialog(
+                              context: context,
+                              builder: (_) {
+                                return AddPortfolioDialog(symbol: symbol);
+                              },
+                            );
                           },
                         );
                       }).toList() +
@@ -129,12 +126,8 @@ class SearchPage extends SearchDelegate {
       inputDecorationTheme: InputDecorationTheme(
         border: InputBorder.none,
       ),
+      scaffoldBackgroundColor: theme.primaryColor,
       primaryColor: theme.primaryColor,
-      textSelectionTheme: TextSelectionThemeData(
-        cursorColor: theme.primaryColorLight,
-        selectionColor: theme.primaryColorLight,
-        selectionHandleColor: theme.colorScheme.onPrimary,
-      ),
       colorScheme: theme.colorScheme.copyWith(
         primary: theme.primaryColor,
       ),
@@ -143,9 +136,6 @@ class SearchPage extends SearchDelegate {
         headline6: TextStyle(
           color: theme.colorScheme.onPrimary.withAlpha(200),
         ),
-      ),
-      appBarTheme: AppBarTheme(
-        elevation: 0.0,
       ),
     );
   }

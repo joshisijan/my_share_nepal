@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
-import 'package:my_share_nepal/reusable/custom_button_on_dark.dart';
+import 'package:my_share_nepal/reusable/custom_button.dart';
 import 'package:my_share_nepal/reusable/custom_popup_menu_item.dart';
 
 class SearchSymbolTile extends StatelessWidget {
@@ -38,7 +38,7 @@ class SearchSymbolTile extends StatelessWidget {
                       color: Theme.of(context)
                           .colorScheme
                           .onPrimary
-                          .withAlpha(200),
+                          .withAlpha(150),
                       fontWeight: FontWeight.bold,
                     ),
               ),
@@ -49,11 +49,12 @@ class SearchSymbolTile extends StatelessWidget {
                         color: Theme.of(context)
                             .colorScheme
                             .onPrimary
-                            .withAlpha(200),
+                            .withAlpha(150),
                       ),
                       color: Theme.of(context).primaryColorLight,
                       onSelected: (value) {
-                        if (value == 1) {
+                        if (value == 0) {
+                        } else {
                           onAdd.call();
                         }
                       },
@@ -76,7 +77,7 @@ class SearchSymbolTile extends StatelessWidget {
                         ];
                       },
                     )
-                  : CustomButtonOnDark(
+                  : CustomButton(
                       isIconButton: true,
                       icon: Icons.add,
                       onPressed: onAdd,
