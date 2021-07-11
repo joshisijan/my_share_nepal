@@ -32,7 +32,7 @@ class SearchTab extends StatelessWidget {
               child: Text(
                 'Search...',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
+                  color: Theme.of(context).primaryColorDark,
                 ),
               ),
             ),

@@ -24,7 +24,6 @@ class PortfolioCubit extends Cubit<PortfolioState> {
         portfolios: [...portfolios],
       ));
     } catch (e) {
-      print(e.toString());
       emit(PortfolioError());
     }
   }

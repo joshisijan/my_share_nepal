@@ -57,14 +57,15 @@ class SearchPage extends SearchDelegate {
                     return SearchSymbolTile(
                       title: symbol.symbol,
                       onAdd: () {
-                        Portfolio().insertPortfolio(PortfolioModel(
-                          symbolModel: symbol,
-                          purchaseDate: DateTime.now(),
-                          purchasePrice: 200.22,
-                          quantity: 100,
-                          symbolId: symbol.id ?? 1,
-                        ));
-                        context.read<PortfolioCubit>().getPortfolio();
+                        context
+                            .read<PortfolioCubit>()
+                            .insertSymbol(PortfolioModel(
+                              symbolModel: symbol,
+                              purchaseDate: DateTime.now(),
+                              purchasePrice: 200.22,
+                              quantity: 100,
+                              symbolId: symbol.id ?? 1,
+                            ));
                       },
                     );
                   }).toList(),

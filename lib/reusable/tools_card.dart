@@ -4,7 +4,7 @@ import 'package:my_share_nepal/helper/constants.dart';
 class ToolsCard extends StatelessWidget {
   final String title;
   final IconData icon;
-  final Function onPressed;
+  final Function() onPressed;
   ToolsCard({
     required this.title,
     required this.icon,
@@ -20,9 +20,7 @@ class ToolsCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
       ),
       child: MaterialButton(
-        onPressed: () {
-          onPressed.call();
-        },
+        onPressed: onPressed,
         padding: EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [

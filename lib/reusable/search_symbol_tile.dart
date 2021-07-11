@@ -3,7 +3,7 @@ import 'package:my_share_nepal/helper/constants.dart';
 
 class SearchSymbolTile extends StatelessWidget {
   final String title;
-  final Function onAdd;
+  final Function() onAdd;
   SearchSymbolTile({
     required this.title,
     required this.onAdd,
@@ -44,9 +44,7 @@ class SearchSymbolTile extends StatelessWidget {
                   Icons.add,
                   color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
                 ),
-                onPressed: () {
-                  onAdd().call();
-                },
+                onPressed: onAdd,
               ),
             ],
           ),
