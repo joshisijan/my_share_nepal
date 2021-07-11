@@ -2,20 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
+import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_share_nepal/widget/portfolio_remove_dialog.dart';
 
-class SymbolTab extends StatelessWidget {
-  final SymbolModel? symbolModel;
+class PortfolioSymbolTile extends StatelessWidget {
+  final PortfolioModel portfolioModel;
   final int? id;
-  SymbolTab({
-    required this.symbolModel,
+  PortfolioSymbolTile({
+    required this.portfolioModel,
     required this.id,
   });
   final NumberFormat numberFormat =
       NumberFormat("##,##,##,##,##,##,##,###0.0#", "en_US");
   @override
   Widget build(BuildContext context) {
+    SymbolModel? symbolModel = portfolioModel.symbolModel;
     return Column(
       children: [
         Divider(
@@ -31,11 +34,22 @@ class SymbolTab extends StatelessWidget {
                   color: Theme.of(context).primaryColorLight,
                 ),
                 onPressed: () {
-                  context.read<PortfolioCubit>().removeSymbol(id ?? 1);
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return PortfolioRemoveDialog(
+                        portfolioModel: portfolioModel,
+                        onRemove: () {
+                          context.read<PortfolioCubit>().removeSymbol(id ?? 0);
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
+                  );
                 },
               ),
               Text(
-                symbolModel == null ? 'Error' : symbolModel!.symbol,
+                symbolModel == null ? 'Error' : symbolModel.symbol,
                 style: Theme.of(context).textTheme.subtitle1!.copyWith(
                       color: Theme.of(context)
                           .colorScheme
@@ -56,7 +70,7 @@ class SymbolTab extends StatelessWidget {
                     Text(
                       symbolModel == null
                           ? 'Error'
-                          : numberFormat.format(symbolModel!.close),
+                          : numberFormat.format(symbolModel.close),
                       textAlign: TextAlign.end,
                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
                             color: Theme.of(context)
@@ -85,18 +99,18 @@ class SymbolTab extends StatelessWidget {
                           Icon(
                             symbolModel == null
                                 ? Icons.arrow_upward
-                                : symbolModel!.differencePercentage < 0
+                                : symbolModel.differencePercentage < 0
                                     ? Icons.arrow_downward
-                                    : symbolModel!.differencePercentage == 0
+                                    : symbolModel.differencePercentage == 0
                                         ? Icons.lunch_dining
                                         : Icons.arrow_upward,
                             size:
                                 Theme.of(context).textTheme.bodyText2!.fontSize,
                             color: symbolModel == null
                                 ? Colors.green
-                                : symbolModel!.differencePercentage < 0
+                                : symbolModel.differencePercentage < 0
                                     ? Colors.red
-                                    : symbolModel!.differencePercentage == 0
+                                    : symbolModel.differencePercentage == 0
                                         ? Theme.of(context)
                                             .colorScheme
                                             .onPrimary
@@ -106,11 +120,11 @@ class SymbolTab extends StatelessWidget {
                           Text(
                             symbolModel == null
                                 ? 'Error'
-                                : symbolModel!.differencePercentage < 0
-                                    ? (symbolModel!.differencePercentage * -1)
+                                : symbolModel.differencePercentage < 0
+                                    ? (symbolModel.differencePercentage * -1)
                                             .toStringAsFixed(2) +
                                         '%'
-                                    : symbolModel!.differencePercentage
+                                    : symbolModel.differencePercentage
                                             .toStringAsFixed(2) +
                                         '%',
                             style: Theme.of(context)
@@ -120,9 +134,9 @@ class SymbolTab extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   color: symbolModel == null
                                       ? Colors.green
-                                      : symbolModel!.differencePercentage < 0
+                                      : symbolModel.differencePercentage < 0
                                           ? Colors.red
-                                          : symbolModel!.differencePercentage ==
+                                          : symbolModel.differencePercentage ==
                                                   0
                                               ? Theme.of(context)
                                                   .colorScheme

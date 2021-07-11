@@ -22,7 +22,7 @@ class SymbolsCubit extends Cubit<SymbolsState> {
   }
 
   getSymbols() async {
-    if(state is SymbolsLoading) return;
+    if (state is SymbolsLoading) return;
     try {
       if (state is SymbolsInitial) emit(SymbolsLoading());
       List<SymbolModel> symbols = await Symbol().getAllSymbol();
@@ -31,6 +31,20 @@ class SymbolsCubit extends Cubit<SymbolsState> {
       ));
     } catch (e) {
       emit(SymbolsError());
+    }
+  }
+
+  findSymbols(String query) async {
+    if (state is SymbolsFindLoading) return;
+    try {
+      emit(SymbolsFindLoading());
+      List<SymbolModel> symbols = await Symbol().findSymbol(query);
+      emit(SymbolsFindLoaded(
+        symbols: symbols,
+      ));
+    } catch (e) {
+      print(e.toString());
+      emit(SymbolsFindError());
     }
   }
 }

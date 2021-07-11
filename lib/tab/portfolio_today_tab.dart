@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
-import 'package:my_share_nepal/reusable/symbol_tab.dart';
+import 'package:my_share_nepal/reusable/portfolio_symbol_tile.dart';
 
 class PortfolioTodayTab extends StatelessWidget {
   final List<PortfolioModel> portfolios;
@@ -59,9 +59,10 @@ class PortfolioTodayTab extends StatelessWidget {
           height: kDefaultPadding * 2,
         ),
         Column(
+          verticalDirection: VerticalDirection.up,
           children: portfolios.map<Widget>((portfolio) {
-            return SymbolTab(
-              symbolModel: portfolio.symbolModel,
+            return PortfolioSymbolTile(
+              portfolioModel: portfolio,
               id: portfolio.id,
             );
           }).toList(),

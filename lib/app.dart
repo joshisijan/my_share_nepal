@@ -35,7 +35,9 @@ class _AppState extends State<App> {
               onPressed: () async {
                 showSearch(
                   context: context,
-                  delegate: SearchPage(),
+                  delegate: SearchPage(
+                    searchIndex: 1, //redirects with add button in tile
+                  ),
                 );
               },
             )

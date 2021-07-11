@@ -92,6 +92,38 @@ class Symbol {
     );
   }
 
+  Future<List<SymbolModel>> findSymbol(String query) async {
+    Database db = await AppDatabase().openAppDatabase();
+    List<Map<String, dynamic>> symbols = await db.query('Symbol',
+        where: 'symbol like ?', whereArgs: ['%' + query + '%']);
+    await db.close();
+    return List.generate(symbols.length, (index) {
+      return SymbolModel(
+        id: symbols[index]['id'],
+        symbol: symbols[index]['symbol'],
+        stockConfidence: symbols[index]['stockConfidence'],
+        open: symbols[index]['open'],
+        high: symbols[index]['high'],
+        low: symbols[index]['low'],
+        close: symbols[index]['close'],
+        vwap: symbols[index]['vwap'],
+        volume: symbols[index]['volume'],
+        previousClose: symbols[index]['previousClose'],
+        turnover: symbols[index]['turnover'],
+        transactions: symbols[index]['transactions'],
+        difference: symbols[index]['difference'],
+        range: symbols[index]['range'],
+        differencePercentage: symbols[index]['differencePercentage'],
+        rangePercentage: symbols[index]['rangePercentage'],
+        vwapPercentage: symbols[index]['vwapPercentage'],
+        oneTwentyDays: symbols[index]['oneTwentyDays'],
+        oneEightyDays: symbols[index]['oneEightyDays'],
+        fiftyTwoWeeksHigh: symbols[index]['fiftyTwoWeeksHigh'],
+        fiftyTwoWeeksLow: symbols[index]['fiftyTwoWeeksLow'],
+      );
+    });
+  }
+
   fetchSymbols() async {
     http.Response response = await http.get(Uri.parse(kTodaysDetailUrl));
     if (response.statusCode == 200) {

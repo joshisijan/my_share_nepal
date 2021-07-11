@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
+import 'package:my_share_nepal/reusable/custom_popup_menu_item.dart';
 
 class SearchSymbolTile extends StatelessWidget {
   final String title;
   final Function() onAdd;
+  final int searchIndex;
   SearchSymbolTile({
     required this.title,
     required this.onAdd,
+    this.searchIndex = 0,
   });
   @override
   Widget build(BuildContext context) {
@@ -18,8 +21,12 @@ class SearchSymbolTile extends StatelessWidget {
         ),
         Container(
           width: double.maxFinite,
-          padding: EdgeInsets.symmetric(
-              horizontal: kDefaultPadding * 2, vertical: kDefaultPadding / 2),
+          padding: EdgeInsets.only(
+            left: kDefaultPadding * 2,
+            right: kDefaultPadding,
+            bottom: kDefaultPadding / 2,
+            top: kDefaultPadding / 2,
+          ),
           child: Wrap(
             alignment: WrapAlignment.spaceBetween,
             crossAxisAlignment: WrapCrossAlignment.center,
@@ -34,18 +41,56 @@ class SearchSymbolTile extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              MaterialButton(
-                elevation: 0.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-                ),
-                color: Theme.of(context).primaryColorLight,
-                child: Icon(
-                  Icons.add,
-                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
-                ),
-                onPressed: onAdd,
-              ),
+              searchIndex == 0
+                  ? PopupMenuButton(
+                      icon: Icon(
+                        Icons.more_vert,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onPrimary
+                            .withAlpha(200),
+                      ),
+                      color: Theme.of(context).primaryColorLight,
+                      onSelected: (value) {
+                        if (value == 1) {
+                          onAdd.call();
+                        }
+                      },
+                      itemBuilder: (context) {
+                        return [
+                          PopupMenuItem(
+                            value: 0,
+                            child: CustomPopupMenuItem(
+                              icon: Icons.feed,
+                              title: 'View details',
+                            ),
+                          ),
+                          PopupMenuItem(
+                            value: 1,
+                            child: CustomPopupMenuItem(
+                              icon: Icons.add,
+                              title: 'Add to portfolio',
+                            ),
+                          ),
+                        ];
+                      },
+                    )
+                  : MaterialButton(
+                      elevation: 0.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(kDefaultBorderRadius),
+                      ),
+                      color: Theme.of(context).primaryColorLight,
+                      child: Icon(
+                        Icons.add,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onPrimary
+                            .withAlpha(200),
+                      ),
+                      onPressed: onAdd,
+                    ),
             ],
           ),
         ),

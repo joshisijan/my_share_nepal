@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
+import 'package:my_share_nepal/screen/search_page.dart';
 import 'package:my_share_nepal/widget/no_recent_search.dart';
 
 class SearchTab extends StatelessWidget {
@@ -36,7 +37,14 @@ class SearchTab extends StatelessWidget {
                 ),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: SearchPage(
+                  searchIndex: 0, //redirects with more option in tile
+                ),
+              );
+            },
           ),
           SizedBox(
             height: kDefaultPadding,

@@ -25,3 +25,15 @@ class SymbolsFetchErrorEnd extends SymbolsState {}
 class SymbolsFetchLoaded extends SymbolsState {}
 
 class SymbolsFetchLoadedEnd extends SymbolsState {}
+
+class SymbolsFindLoading extends SymbolsState {}
+
+class SymbolsFindError extends SymbolsState {}
+
+class SymbolsFindLoaded extends SymbolsState {
+  List<SymbolModel> symbols;
+
+  SymbolsFindLoaded({
+    symbols,
+  }) : symbols = symbols ?? [];
+}
