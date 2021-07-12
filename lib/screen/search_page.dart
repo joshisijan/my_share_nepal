@@ -131,12 +131,19 @@ class SearchPage extends SearchDelegate {
       colorScheme: theme.colorScheme.copyWith(
         primary: theme.primaryColor,
       ),
+      textSelectionTheme: theme.brightness == Brightness.dark
+          ? TextSelectionThemeData(
+              selectionColor: Theme.of(context).buttonColor,
+              cursorColor: Theme.of(context).buttonColor,
+            )
+          : theme.textSelectionTheme,
       hintColor: theme.colorScheme.onPrimary.withAlpha(120),
       textTheme: theme.textTheme.copyWith(
         headline6: TextStyle(
           color: theme.colorScheme.onPrimary.withAlpha(200),
         ),
       ),
+      appBarTheme: AppBarTheme(brightness: Brightness.dark),
     );
   }
 }

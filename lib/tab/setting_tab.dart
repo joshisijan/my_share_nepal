@@ -17,14 +17,13 @@ class _SettingTabState extends State<SettingTab> {
         context.watch<ThemeCubit>().state.brightness == Brightness.dark;
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      color: Theme.of(context).primaryColorDark,
       child: ListView(
         padding: EdgeInsets.all(kDefaultPadding),
         children: [
           Text(
             'Settings',
             style: Theme.of(context).textTheme.headline3!.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
                   fontWeight: FontWeight.bold,
                 ),
           ),
@@ -51,6 +50,7 @@ class _SettingTabState extends State<SettingTab> {
                               .colorScheme
                               .onPrimary
                               .withAlpha(200),
+                          fontWeight: FontWeight.bold,
                         ),
                   ),
                 ),
@@ -108,6 +108,7 @@ class _SettingTabState extends State<SettingTab> {
                               .colorScheme
                               .onPrimary
                               .withAlpha(200),
+                          fontWeight: FontWeight.bold,
                         ),
                   ),
                 ),

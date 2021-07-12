@@ -31,6 +31,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColorDark,
       floatingActionButton: _bottomNavigationBarIndex == 2
           ? CustomButton(
               isIconButton: true,

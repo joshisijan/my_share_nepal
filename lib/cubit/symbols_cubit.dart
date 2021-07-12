@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
 import 'package:my_share_nepal/cubit/symbols_state.dart';
 import 'package:my_share_nepal/model/symbol.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
@@ -12,6 +13,7 @@ class SymbolsCubit extends Cubit<SymbolsState> {
       emit(SymbolsFetchLoading());
       await Symbol().fetchSymbols();
       emit(SymbolsFetchLoaded());
+      PortfolioCubit().getPortfolio(); // get portfolio after fetch complete
       await Future.delayed(Duration(seconds: 2));
       emit(SymbolsFetchLoadedEnd());
     } catch (e) {
