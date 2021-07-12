@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/reusable/custom_button.dart';
+import 'package:my_share_nepal/reusable/custom_popup_menu_button.dart';
 import 'package:my_share_nepal/reusable/custom_popup_menu_item.dart';
 
 class SearchSymbolTile extends StatelessWidget {
@@ -43,15 +44,7 @@ class SearchSymbolTile extends StatelessWidget {
                     ),
               ),
               searchIndex == 0
-                  ? PopupMenuButton(
-                      icon: Icon(
-                        Icons.more_vert,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onPrimary
-                            .withAlpha(150),
-                      ),
-                      color: Theme.of(context).primaryColorLight,
+                  ? CustomPopupMenuButton(
                       onSelected: (value) {
                         if (value == 0) {
                         } else {

@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
-import 'package:my_share_nepal/reusable/portfolio_symbol_tile.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/portfolio_symbol_tile.dart';
 
 class PortfolioTodayTab extends StatelessWidget {
-  final List<PortfolioModel> portfolios;
+  final List<PortfolioModel> portfolioModels;
   PortfolioTodayTab({
-    required this.portfolios,
+    required this.portfolioModels,
   });
   @override
   Widget build(BuildContext context) {
     double changePercentage = 0.0;
-    for (int i = 0; i < portfolios.length; i++) {
-      if (portfolios[i].symbolModel != null) {
-        changePercentage += portfolios[i].symbolModel!.differencePercentage;
+    for (int i = 0; i < portfolioModels.length; i++) {
+      if (portfolioModels[i].symbolModel != null) {
+        changePercentage +=
+            portfolioModels[i].symbolModel!.differencePercentage;
       }
     }
     return Column(
@@ -59,13 +60,23 @@ class PortfolioTodayTab extends StatelessWidget {
           height: kDefaultPadding * 2,
         ),
         Column(
-          verticalDirection: VerticalDirection.up,
-          children: portfolios.map<Widget>((portfolio) {
+          verticalDirection:
+              VerticalDirection.up, // to show latest added share on top
+          children: List.generate(portfolioModels.length, (index) {
+            // for showing portfolio of same same name together
+            // all share except first
+            if (index > 0 && index < portfolioModels.length) {
+              // checking if symbol is same
+              if (portfolioModels[index].symbolModel!.symbol ==
+                  portfolioModels[index - 1].symbolModel!.symbol) {
+                return SizedBox.shrink();
+              }
+            }
             return PortfolioSymbolTile(
-              portfolioModel: portfolio,
-              id: portfolio.id,
+              portfolioModel: portfolioModels[index],
+              id: portfolioModels[index].id,
             );
-          }).toList(),
+          }),
         ),
         Divider(
           color: Theme.of(context).primaryColor,

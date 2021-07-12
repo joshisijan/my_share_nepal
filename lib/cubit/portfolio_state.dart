@@ -1,4 +1,4 @@
-import 'package:my_share_nepal/model/portfolio_model.dart';
+part of 'portfolio_cubit.dart';
 
 abstract class PortfolioState {}
 
@@ -9,9 +9,9 @@ class PortfolioError extends PortfolioState {}
 class PortfolioLoading extends PortfolioState {}
 
 class PortfolioLoaded extends PortfolioState {
-  List<PortfolioModel> portfolios;
+  final List<PortfolioModel> portfolioModels;
 
   PortfolioLoaded({
-    portfolios,
-  }) : portfolios = portfolios ?? [];
+    portfolioModels,
+  }) : portfolioModels = portfolioModels ?? [];
 }

@@ -3,13 +3,13 @@ import 'package:intl/intl.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/reusable/custom_button.dart';
-import 'package:my_share_nepal/reusable/portfolio_symbol_tile.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/portfolio_symbol_tile.dart';
 
 class PortfolioOverallTab extends StatelessWidget {
-  final List<PortfolioModel> portfolios;
+  final List<PortfolioModel> portfolioModels;
 
   PortfolioOverallTab({
-    required this.portfolios,
+    required this.portfolioModels,
   });
 
   final NumberFormat numberFormat =
@@ -20,10 +20,12 @@ class PortfolioOverallTab extends StatelessWidget {
     double investment = 0;
     double change = 0;
     double changePercentage = 0;
-    for (int i = 0; i < portfolios.length; i++) {
-      if (portfolios[i].symbolModel != null) {
-        value += portfolios[i].symbolModel!.close * portfolios[i].quantity;
-        investment += portfolios[i].quantity * portfolios[i].purchasePrice;
+    for (int i = 0; i < portfolioModels.length; i++) {
+      if (portfolioModels[i].symbolModel != null) {
+        value +=
+            portfolioModels[i].symbolModel!.close * portfolioModels[i].quantity;
+        investment +=
+            portfolioModels[i].quantity * portfolioModels[i].purchasePrice;
       }
     }
     change = value - investment;
@@ -136,13 +138,23 @@ class PortfolioOverallTab extends StatelessWidget {
           ),
         ),
         Column(
-          verticalDirection: VerticalDirection.up,
-          children: portfolios.map<Widget>((portfolio) {
+          verticalDirection:
+              VerticalDirection.up, // to show latest added share on top
+          children: List.generate(portfolioModels.length, (index) {
+            // for showing portfolio of same same name together
+            // all share except first
+            if (index > 0 && index < portfolioModels.length) {
+              // checking if symbol is same
+              if (portfolioModels[index].symbolModel!.symbol ==
+                  portfolioModels[index - 1].symbolModel!.symbol) {
+                return SizedBox.shrink();
+              }
+            }
             return PortfolioSymbolTile(
-              portfolioModel: portfolio,
-              id: portfolio.id,
+              portfolioModel: portfolioModels[index],
+              id: portfolioModels[index].id,
             );
-          }).toList(),
+          }),
         ),
         Divider(
           color: Theme.of(context).primaryColor,

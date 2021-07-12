@@ -1,4 +1,4 @@
-import 'package:my_share_nepal/model/symbol_model.dart';
+part of 'symbols_cubit.dart';
 
 abstract class SymbolsState {}
 
@@ -16,22 +16,12 @@ class SymbolsLoaded extends SymbolsState {
   }) : symbols = symbols ?? [];
 }
 
-class SymbolsFetchLoading extends SymbolsState {}
-
-class SymbolsFetchError extends SymbolsState {}
-
-class SymbolsFetchErrorEnd extends SymbolsState {}
-
-class SymbolsFetchLoaded extends SymbolsState {}
-
-class SymbolsFetchLoadedEnd extends SymbolsState {}
-
 class SymbolsFindLoading extends SymbolsState {}
 
 class SymbolsFindError extends SymbolsState {}
 
 class SymbolsFindLoaded extends SymbolsState {
-  List<SymbolModel> symbols;
+  final List<SymbolModel> symbols;
 
   SymbolsFindLoaded({
     symbols,

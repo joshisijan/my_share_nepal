@@ -2,13 +2,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
-import 'package:my_share_nepal/cubit/portfolio_state.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/reusable/big_loading.dart';
 import 'package:my_share_nepal/tab/portfolio_overall_tab.dart';
 import 'package:my_share_nepal/tab/portfolio_today_tab.dart';
-import 'package:my_share_nepal/widget/no_portfolio.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/no_portfolio.dart';
 
 class PortfolioTab extends StatefulWidget {
   @override
@@ -35,69 +34,73 @@ class _PortfolioTabState extends State<PortfolioTab> {
           SizedBox(
             height: kDefaultPadding,
           ),
-          DefaultTabController(
-            initialIndex: 0,
-            length: 2,
-            child: Column(
-              children: [
-                TabBar(
-                  controller: DefaultTabController.of(context),
-                  indicator: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+          Wrap(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width / 2 - 20.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+                  color: _tabIndex == 0
+                      ? Theme.of(context).primaryColorLight.withAlpha(150)
+                      : null,
+                ),
+                child: TextButton.icon(
+                  icon: Icon(
+                    Icons.today,
+                    color:
+                        Theme.of(context).colorScheme.onPrimary.withAlpha(150),
                   ),
-                  onTap: (index) {
-                    if (index != _tabIndex) {
+                  label: Text(
+                    'Today',
+                    style: TextStyle(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onPrimary
+                          .withAlpha(150),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (_tabIndex != 0) {
                       setState(() {
-                        _tabIndex = index;
+                        _tabIndex = 0;
                       });
                     }
                   },
-                  tabs: [
-                    Tab(
-                      child: TextButton.icon(
-                        icon: Icon(
-                          Icons.today,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onPrimary
-                              .withAlpha(200),
-                        ),
-                        label: Text(
-                          'Today',
-                          style: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary
-                                  .withAlpha(200)),
-                        ),
-                        onPressed: null,
-                      ),
-                    ),
-                    Tab(
-                      child: TextButton.icon(
-                        icon: Icon(
-                          Icons.bar_chart,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onPrimary
-                              .withAlpha(200),
-                        ),
-                        label: Text(
-                          'Overall',
-                          style: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary
-                                  .withAlpha(200)),
-                        ),
-                        onPressed: null,
-                      ),
-                    ),
-                  ],
                 ),
-              ],
-            ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width / 2 - 20.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+                  color: _tabIndex == 1
+                      ? Theme.of(context).primaryColorLight.withAlpha(150)
+                      : null,
+                ),
+                child: TextButton.icon(
+                  icon: Icon(
+                    Icons.bar_chart,
+                    color:
+                        Theme.of(context).colorScheme.onPrimary.withAlpha(150),
+                  ),
+                  label: Text(
+                    'Overall',
+                    style: TextStyle(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onPrimary
+                          .withAlpha(150),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (_tabIndex != 1) {
+                      setState(() {
+                        _tabIndex = 1;
+                      });
+                    }
+                  },
+                ),
+              ),
+            ],
           ),
           // main body starts from here
           BlocBuilder<PortfolioCubit, PortfolioState>(
@@ -107,15 +110,16 @@ class _PortfolioTabState extends State<PortfolioTab> {
               } else if (portfolioState is PortfolioError) {
                 return BigError();
               } else {
-                if ((portfolioState as PortfolioLoaded).portfolios.isEmpty) {
+                portfolioState as PortfolioLoaded;
+                if (portfolioState.portfolioModels.isEmpty) {
                   return NoPortfolio();
                 }
                 return _tabIndex == 0
                     ? PortfolioTodayTab(
-                        portfolios: portfolioState.portfolios,
+                        portfolioModels: portfolioState.portfolioModels,
                       )
                     : PortfolioOverallTab(
-                        portfolios: portfolioState.portfolios,
+                        portfolioModels: portfolioState.portfolioModels,
                       );
               }
             },

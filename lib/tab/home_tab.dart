@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_share_nepal/cubit/symbols_cubit.dart';
+import 'package:my_share_nepal/cubit/fetch_symbols_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 
 class HomeTab extends StatelessWidget {
@@ -16,7 +16,7 @@ class HomeTab extends StatelessWidget {
             textColor: Colors.white,
             child: Text('fetch'),
             onPressed: () {
-              context.read<SymbolsCubit>().fetchSymbols();
+              context.read<FetchSymbolsCubit>().fetchSymbols();
             },
           ),
           SizedBox(

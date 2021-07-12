@@ -24,7 +24,7 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
     // context
-    //     .read<SymbolsCubit>()
+    //     .read<FetchSymbolsCubit>()
     //     .autoFetchSymbols(); // auto fetch latest data every 2 minutes
   }
 

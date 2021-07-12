@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_share_nepal/cubit/symbols_cubit.dart';
-import 'package:my_share_nepal/cubit/symbols_state.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/reusable/big_loading.dart';
 import 'package:my_share_nepal/reusable/custom_button.dart';
 import 'package:my_share_nepal/reusable/search_symbol_tile.dart';
-import 'package:my_share_nepal/widget/add_portfolio_dialog.dart';
-import 'package:my_share_nepal/widget/no_search_result.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/add_portfolio_dialog.dart';
+import 'package:my_share_nepal/widget/search_tab/no_search_result.dart';
 
 class SearchPage extends SearchDelegate {
   final int searchIndex;
@@ -60,7 +59,7 @@ class SearchPage extends SearchDelegate {
             ),
           )
         : Container(
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).primaryColorDark,
           );
   }
 
@@ -126,7 +125,7 @@ class SearchPage extends SearchDelegate {
       inputDecorationTheme: InputDecorationTheme(
         border: InputBorder.none,
       ),
-      scaffoldBackgroundColor: theme.primaryColor,
+      scaffoldBackgroundColor: theme.primaryColorDark,
       primaryColor: theme.primaryColor,
       colorScheme: theme.colorScheme.copyWith(
         primary: theme.primaryColor,

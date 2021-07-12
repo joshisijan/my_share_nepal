@@ -36,6 +36,7 @@ class NothingFound extends StatelessWidget {
           ),
           Text(
             this.title,
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headline5!.copyWith(
                   color: isError
                       ? Colors.red

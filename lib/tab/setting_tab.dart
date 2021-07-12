@@ -3,7 +3,7 @@ import 'package:my_share_nepal/helper/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_share_nepal/cubit/theme_cubit.dart';
 import 'package:my_share_nepal/reusable/setting_list_tile.dart';
-import 'package:my_share_nepal/widget/app_color_list.dart';
+import 'package:my_share_nepal/widget/settings_tab/app_color_list.dart';
 
 class SettingTab extends StatefulWidget {
   @override

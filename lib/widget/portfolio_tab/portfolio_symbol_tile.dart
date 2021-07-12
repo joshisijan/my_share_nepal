@@ -3,10 +3,15 @@ import 'package:intl/intl.dart';
 import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/helper/utilities.dart';
+import 'package:my_share_nepal/model/portfolio.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_share_nepal/widget/portfolio_remove_dialog.dart';
+import 'package:my_share_nepal/reusable/custom_popup_menu_button.dart';
+import 'package:my_share_nepal/reusable/custom_popup_menu_item.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/multi_portfolio_edit_dialog.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/multi_portfolio_remove_dialog.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/portfolio_remove_dialog.dart';
 
 class PortfolioSymbolTile extends StatelessWidget {
   final PortfolioModel portfolioModel;
@@ -17,6 +22,7 @@ class PortfolioSymbolTile extends StatelessWidget {
   });
   final NumberFormat numberFormat =
       NumberFormat("##,##,##,##,##,##,##,###0.0#", "en_US");
+
   @override
   Widget build(BuildContext context) {
     SymbolModel? symbolModel = portfolioModel.symbolModel;
@@ -29,29 +35,39 @@ class PortfolioSymbolTile extends StatelessWidget {
           padding: EdgeInsets.all(kDefaultPadding / 2),
           child: Row(
             children: [
-              IconButton(
-                icon: Icon(
-                  Icons.remove_circle,
-                  color: Theme.of(context).primaryColorLight,
-                ),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return PortfolioRemoveDialog(
-                        portfolioModel: portfolioModel,
-                        onRemove: () {
-                          context.read<PortfolioCubit>().removeSymbol(id ?? 0);
-                          Navigator.pop(context);
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(normalSnackBar(
-                            context,
-                            'Successfully emoved from portfolio.',
-                          ));
-                        },
-                      );
-                    },
-                  );
+              CustomPopupMenuButton(
+                onSelected: (value) {
+                  if (value == 0) {
+                  } else if (value == 1) {
+                    showPortfolioEditDialog(context);
+                  } else if (value == 2) {
+                    showPortfolioRemoveDialog(context);
+                  }
+                },
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(
+                      value: 0,
+                      child: CustomPopupMenuItem(
+                        icon: Icons.feed,
+                        title: 'Summarize',
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 1,
+                      child: CustomPopupMenuItem(
+                        icon: Icons.edit,
+                        title: 'Edit',
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 2,
+                      child: CustomPopupMenuItem(
+                        icon: Icons.delete,
+                        title: 'Remove',
+                      ),
+                    ),
+                  ];
                 },
               ),
               Text(
@@ -162,5 +178,56 @@ class PortfolioSymbolTile extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  showPortfolioRemoveDialog(BuildContext context) async {
+    List<PortfolioModel> portfolioModels =
+        await Portfolio().getForMultiSymbols(portfolioModel.symbolId);
+    // if portfolio have same share added multiple time
+    if (portfolioModels.length > 1) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return MultiPortfolioRemoveDialog(
+            symbolId: portfolioModel.symbolId,
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return PortfolioRemoveDialog(
+            portfolioModel: portfolioModel,
+            onRemove: () {
+              context.read<PortfolioCubit>().removeFromPortfolio(id ?? 0);
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(normalSnackBar(
+                context,
+                'Successfully removed from portfolio.',
+              ));
+            },
+          );
+        },
+      );
+    }
+  }
+
+  showPortfolioEditDialog(BuildContext context) async {
+    List<PortfolioModel> portfolioModels =
+        await Portfolio().getForMultiSymbols(portfolioModel.symbolId);
+    // if portfolio have same share added multiple time
+    if (portfolioModels.length > 1) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return MultiPortfolioEditDialog(
+            symbolId: portfolioModel.symbolId,
+          );
+        },
+      );
+    } else {
+      // Navigate to edit page
+    }
   }
 }

@@ -11,15 +11,15 @@ class Portfolio {
 
   Future<List<PortfolioModel>> getPortfolio() async {
     Database db = await AppDatabase().openAppDatabase();
-    List<Map<String, dynamic>> portfolios = await db.query('Portfolio');
+    List<Map<String, dynamic>> result = await db.query('Portfolio');
     await db.close();
-    return List.generate(portfolios.length, (index) {
+    return List.generate(result.length, (index) {
       return PortfolioModel(
-        id: portfolios[index]['id'],
-        symbolId: portfolios[index]['symbolId'],
-        quantity: portfolios[index]['quantity'],
-        purchasePrice: portfolios[index]['purchasePrice'],
-        purchaseDate: DateTime.parse(portfolios[index]['purchaseDate']),
+        id: result[index]['id'],
+        symbolId: result[index]['symbolId'],
+        quantity: result[index]['quantity'],
+        purchasePrice: result[index]['purchasePrice'],
+        purchaseDate: DateTime.parse(result[index]['purchaseDate']),
       );
     });
   }
@@ -28,5 +28,21 @@ class Portfolio {
     Database db = await AppDatabase().openAppDatabase();
     await db.delete('Portfolio', where: 'id = ?', whereArgs: [id]);
     await db.close();
+  }
+
+  Future<List<PortfolioModel>> getForMultiSymbols(int id) async {
+    Database db = await AppDatabase().openAppDatabase();
+    List<Map<String, dynamic>> result =
+        await db.query('Portfolio', where: 'symbolId = ?', whereArgs: [id]);
+    await db.close();
+    return List.generate(result.length, (index) {
+      return PortfolioModel(
+        id: result[index]['id'],
+        symbolId: result[index]['symbolId'],
+        quantity: result[index]['quantity'],
+        purchasePrice: result[index]['purchasePrice'],
+        purchaseDate: DateTime.parse(result[index]['purchaseDate']),
+      );
+    });
   }
 }
