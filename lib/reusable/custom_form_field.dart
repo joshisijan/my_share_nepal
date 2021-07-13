@@ -30,7 +30,7 @@ class CustomFormField extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.onPrimary.withAlpha(50),
+            color: Theme.of(context).colorScheme.onPrimary.withAlpha(100),
           ),
         ),
         focusedBorder: OutlineInputBorder(

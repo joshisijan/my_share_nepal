@@ -3,16 +3,14 @@ import 'package:intl/intl.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
 
-class PortfolioRemoveDialog extends StatelessWidget {
+class DetailPortfolioDialog extends StatelessWidget {
   final PortfolioModel portfolioModel;
-  final Function() onRemove;
-  PortfolioRemoveDialog({
+  DetailPortfolioDialog({
     required this.portfolioModel,
-    required this.onRemove,
   });
 
   final NumberFormat numberFormat =
-      NumberFormat("##,##,##,##,##,##,##,###0.0#", "en_US");
+      NumberFormat("##,##,##,##,##,##,##,###.0#", "en_US");
   final DateFormat dateFormat = DateFormat.yMMMMd('en_US');
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,7 @@ class PortfolioRemoveDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
       ),
       title: Text(
-        'Remove from portfolio?',
+        'Detail',
         style: TextStyle(
             color: Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
       ),
@@ -90,11 +88,6 @@ class PortfolioRemoveDialog extends StatelessWidget {
       actions: [
         IconButton(
           icon: Icon(Icons.check,
-              color: Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
-          onPressed: onRemove,
-        ),
-        IconButton(
-          icon: Icon(Icons.close,
               color: Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
           onPressed: () {
             Navigator.pop(context);

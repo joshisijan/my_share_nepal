@@ -8,7 +8,7 @@ import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/reusable/big_loading.dart';
 import 'package:my_share_nepal/reusable/nothing_found.dart';
-import 'package:my_share_nepal/widget/portfolio_tab/portfolio_remove_dialog.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/remove_portfolio_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MultiPortfolioRemoveDialog extends StatelessWidget {
@@ -17,7 +17,7 @@ class MultiPortfolioRemoveDialog extends StatelessWidget {
     required this.symbolId,
   });
   final NumberFormat numberFormat =
-      NumberFormat("##,##,##,##,##,##,##,###0.0#", "en_US");
+      NumberFormat("##,##,##,##,##,##,##,###.0#", "en_US");
   final DateFormat dateFormat = DateFormat.yMMMMd('en_US');
   @override
   Widget build(BuildContext context) {
@@ -238,8 +238,9 @@ class MultiPortfolioRemoveDialog extends StatelessWidget {
                                           .getForMultiSymbols(symbolId);
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(normalSnackBar(
-                                        context,
-                                        'Successfully removed from portfolio.',
+                                        context: context,
+                                        content:
+                                            'Successfully removed from portfolio.',
                                       ));
                                     },
                                   );
@@ -259,7 +260,7 @@ class MultiPortfolioRemoveDialog extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.close,
+          icon: Icon(Icons.check,
               color: Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
           onPressed: () {
             Navigator.pop(context);

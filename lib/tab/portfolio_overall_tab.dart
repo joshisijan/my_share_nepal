@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_share_nepal/helper/constants.dart';
+import 'package:my_share_nepal/helper/utilities.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/reusable/custom_button.dart';
 import 'package:my_share_nepal/widget/portfolio_tab/portfolio_symbol_tile.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/summary_portfolio_dialog.dart';
 
 class PortfolioOverallTab extends StatelessWidget {
   final List<PortfolioModel> portfolioModels;
@@ -13,19 +15,21 @@ class PortfolioOverallTab extends StatelessWidget {
   });
 
   final NumberFormat numberFormat =
-      NumberFormat("##,##,##,##,##,##,##,###0.0#", "en_US");
+      NumberFormat("##,##,##,##,##,##,##,###.0#", "en_US");
   @override
   Widget build(BuildContext context) {
     double value = 0;
     double investment = 0;
     double change = 0;
     double changePercentage = 0;
+    int totalShare = 0;
     for (int i = 0; i < portfolioModels.length; i++) {
       if (portfolioModels[i].symbolModel != null) {
         value +=
             portfolioModels[i].symbolModel!.close * portfolioModels[i].quantity;
         investment +=
             portfolioModels[i].quantity * portfolioModels[i].purchasePrice;
+        totalShare += portfolioModels[i].quantity;
       }
     }
     change = value - investment;
@@ -124,7 +128,17 @@ class PortfolioOverallTab extends StatelessWidget {
               CustomButton(
                 isIconButton: true,
                 icon: Icons.summarize,
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => SummaryPortfolioDialog(
+                      investment: investment,
+                      value: value,
+                      totalShare: totalShare,
+                      difference: value - investment,
+                    ),
+                  );
+                },
               ),
               SizedBox(
                 width: kDefaultPadding / 2,
@@ -132,7 +146,12 @@ class PortfolioOverallTab extends StatelessWidget {
               CustomButton(
                 isIconButton: true,
                 icon: Icons.insights,
-                onPressed: () {},
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(normalSnackBar(
+                    context: context,
+                    content: 'Share insight functionality comming soom!',
+                  ));
+                },
               ),
             ],
           ),

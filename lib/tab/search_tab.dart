@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
-import 'package:my_share_nepal/reusable/custom_button.dart';
+import 'package:my_share_nepal/reusable/nothing_found.dart';
 import 'package:my_share_nepal/screen/search_page.dart';
-import 'package:my_share_nepal/widget/search_tab/no_recent_search.dart';
 
 class SearchTab extends StatelessWidget {
   @override
@@ -49,22 +48,11 @@ class SearchTab extends StatelessWidget {
           SizedBox(
             height: kDefaultPadding,
           ),
-          Text(
-            'Recent search',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
-            ),
+          NothingFound(
+            icon: Icons.search,
+            title: 'Search symbols',
+            text: 'To start search click the search field above.',
           ),
-          Wrap(
-            children: [
-              CustomButton(
-                isIconButton: true,
-                icon: Icons.delete,
-                onPressed: () {},
-              ),
-            ],
-          ),
-          NoRecentSearch(),
           SizedBox(
             height: kDefaultPadding * 2,
           ),

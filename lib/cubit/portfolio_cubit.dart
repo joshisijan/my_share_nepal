@@ -34,6 +34,11 @@ class PortfolioCubit extends Cubit<PortfolioState> {
     getPortfolio();
   }
 
+  updateSymbol(PortfolioModel portfolioModel) async {
+    await Portfolio().updatePortfolio(portfolioModel);
+    getPortfolio();
+  }
+
   removeFromPortfolio(int id) async {
     await Portfolio().deleteSymbol(id);
     getPortfolio();

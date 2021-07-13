@@ -6,29 +6,28 @@ import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/helper/utilities.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
-import 'package:my_share_nepal/model/symbol_model.dart';
 import 'package:my_share_nepal/reusable/custom_button.dart';
 import 'package:my_share_nepal/reusable/custom_form_field.dart';
 
-class AddPortfolioDialog extends StatefulWidget {
-  final SymbolModel symbol;
-  AddPortfolioDialog({
-    required this.symbol,
+class EditPortfolioDialog extends StatefulWidget {
+  final PortfolioModel portfolioModel;
+  EditPortfolioDialog({
+    required this.portfolioModel,
   });
   final NumberFormat numberFormat =
       NumberFormat("##,##,##,##,##,##,##,###.0#", "en_US");
   final DateFormat dateFormat = DateFormat.yMMMMd('en_US');
   final RegExp digitAndDotRegExp = RegExp(r'^\d+\.?\d{0,2}');
   @override
-  _AddPortfolioDialogState createState() => _AddPortfolioDialogState();
+  _EditPortfolioDialogState createState() => _EditPortfolioDialogState();
 }
 
-class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
+class _EditPortfolioDialogState extends State<EditPortfolioDialog> {
   var _formKey = GlobalKey<FormState>();
-  DateTime? purchaseDate;
   TextEditingController quantityTextEditingController = TextEditingController();
   TextEditingController purchasePriceTextEditingController =
       TextEditingController();
+  DateTime? purchaseDate;
 
   @override
   void dispose() {
@@ -39,6 +38,10 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
 
   @override
   Widget build(BuildContext context) {
+    quantityTextEditingController.text =
+        widget.portfolioModel.quantity.toString();
+    purchasePriceTextEditingController.text =
+        widget.portfolioModel.purchasePrice.toString();
     return Form(
       key: _formKey,
       child: AlertDialog(
@@ -50,7 +53,7 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
           text: TextSpan(
             children: [
               TextSpan(
-                text: 'Add to portfolio',
+                text: 'Edit portfolio',
                 style: Theme.of(context).textTheme.headline6!.copyWith(
                       color: Theme.of(context)
                           .colorScheme
@@ -85,7 +88,7 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
                     ),
               ),
               Text(
-                widget.symbol.symbol,
+                widget.portfolioModel.symbolModel!.symbol,
                 style: Theme.of(context).textTheme.headline6!.copyWith(
                       color: Theme.of(context)
                           .colorScheme
@@ -170,33 +173,27 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
                           .withAlpha(150),
                     ),
               ),
-              purchaseDate == null
-                  ? Text(
-                      'Date and Time not selected so today\'s date and time will be choosen.',
-                      style: Theme.of(context).textTheme.overline!.copyWith(
-                            color: Colors.red,
-                          ),
-                    )
-                  : Text(
-                      widget.dateFormat.format(purchaseDate ?? DateTime.now()),
-                      style: Theme.of(context).textTheme.headline6!.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimary
-                                .withAlpha(150),
-                          ),
+              Text(
+                widget.dateFormat
+                    .format(purchaseDate ?? widget.portfolioModel.purchaseDate),
+                style: Theme.of(context).textTheme.headline6!.copyWith(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onPrimary
+                          .withAlpha(150),
                     ),
+              ),
               CustomButton(
-                text: purchaseDate == null
-                    ? 'Select Purchase Date'
-                    : 'Change Purchase Date',
+                text: 'Change Purchase Date',
                 onPressed: () async {
                   purchaseDate = await showDatePicker(
-                    context: context,
-                    initialDate: purchaseDate ?? DateTime.now(),
-                    firstDate: DateTime(1950, 1, 1),
-                    lastDate: DateTime.now(),
-                  );
+                        context: context,
+                        initialDate:
+                            purchaseDate ?? widget.portfolioModel.purchaseDate,
+                        firstDate: DateTime(1950, 1, 1),
+                        lastDate: DateTime.now(),
+                      ) ??
+                      DateTime.now();
                   setState(() {});
                 },
               ),
@@ -208,9 +205,9 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
         ),
         actions: [
           CustomButton(
-            text: 'Add',
+            text: 'Edit',
             onPressed: () {
-              addPortfolio();
+              editPortfolio();
             },
           ),
           CustomButton(
@@ -224,32 +221,25 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
     );
   }
 
-  addPortfolio() async {
+  editPortfolio() async {
     if (_formKey.currentState!.validate()) {
       try {
-        await context.read<PortfolioCubit>().insertSymbol(PortfolioModel(
-              symbolModel: widget.symbol,
-              purchaseDate: purchaseDate ?? DateTime.now(),
+        await context.read<PortfolioCubit>().updateSymbol(PortfolioModel(
+              id: widget.portfolioModel.id,
+              symbolModel: widget.portfolioModel.symbolModel,
+              purchaseDate: purchaseDate ?? widget.portfolioModel.purchaseDate,
               purchasePrice:
                   double.parse(purchasePriceTextEditingController.text),
               quantity: int.parse(quantityTextEditingController.text),
-              symbolId: widget.symbol.id ?? 0,
+              symbolId: widget.portfolioModel.symbolModel!.id ?? 0,
             ));
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(normalSnackBar(
-            context: context,
-            content: 'Successfully added ' +
-                quantityTextEditingController.text +
-                ' share of ' +
-                widget.symbol.symbol +
-                ' with purchase price of ' +
-                widget.numberFormat.format(
-                    double.parse(purchasePriceTextEditingController.text)) +
-                ' to portfolio.'));
+            context: context, content: 'Successfully edited portfolio'));
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(normalSnackBar(
           context: context,
-          content: 'Error adding to portfolio. Try again later.',
+          content: 'Error editing portfolio. Try again later.',
           error: true,
         ));
       }

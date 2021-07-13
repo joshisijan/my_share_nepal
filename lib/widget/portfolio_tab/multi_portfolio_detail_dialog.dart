@@ -5,12 +5,12 @@ import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/reusable/big_loading.dart';
+import 'package:my_share_nepal/reusable/nothing_found.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_share_nepal/widget/portfolio_tab/edit_portfolio_dialog.dart';
 
-class MultiPortfolioEditDialog extends StatelessWidget {
+class MultiPortfolioDetailDialog extends StatelessWidget {
   final int symbolId;
-  MultiPortfolioEditDialog({
+  MultiPortfolioDetailDialog({
     required this.symbolId,
   });
   final NumberFormat numberFormat =
@@ -28,14 +28,14 @@ class MultiPortfolioEditDialog extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'Which one to edit?',
+              text: 'Details',
               style: Theme.of(context).textTheme.headline6!.copyWith(
                     color:
                         Theme.of(context).colorScheme.onPrimary.withAlpha(150),
                   ),
             ),
             TextSpan(
-              text: '\nScroll if options hidden.\nPress edit button to edit.',
+              text: '\nScroll if options hidden.',
               style: Theme.of(context).textTheme.overline!.copyWith(
                     color:
                         Theme.of(context).colorScheme.onPrimary.withAlpha(150),
@@ -71,7 +71,36 @@ class MultiPortfolioEditDialog extends StatelessWidget {
             portfolioMultiSymbolsState as PortfolioMultiSymbolsLoaded;
             List<PortfolioModel> portfolioModels =
                 portfolioMultiSymbolsState.portfolioModels;
-
+            if (portfolioModels.length <= 0) {
+              return Container(
+                height: MediaQuery.of(context).size.width * 0.8,
+                width: double.maxFinite,
+                child: ListView(
+                  children: [
+                    NothingFound(
+                      icon: Icons.close,
+                      title: 'Everything  removed',
+                      text: 'You can close this dialog.',
+                    ),
+                  ],
+                ),
+              );
+            }
+            if (portfolioModels.length <= 0) {
+              return Container(
+                height: MediaQuery.of(context).size.width * 0.8,
+                width: double.maxFinite,
+                child: ListView(
+                  children: [
+                    NothingFound(
+                      icon: Icons.close,
+                      title: 'Everything  removed',
+                      text: 'You can close this dialog.',
+                    ),
+                  ],
+                ),
+              );
+            }
             return Container(
               height: MediaQuery.of(context).size.width * 0.8,
               width: double.maxFinite,
@@ -180,29 +209,6 @@ class MultiPortfolioEditDialog extends StatelessWidget {
                               ],
                             ),
                           ),
-                          leading: IconButton(
-                            icon: Icon(
-                              Icons.edit,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary
-                                  .withAlpha(150),
-                            ),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return EditPortfolioDialog(
-                                    portfolioModel: portfolioModel,
-                                  );
-                                },
-                              ).then((value) {
-                                context
-                                    .read<PortfolioMultiSymbolsCubit>()
-                                    .getForMultiSymbols(symbolId);
-                              });
-                            },
-                          ),
                         ),
                       );
                     }).toList(),
@@ -215,7 +221,7 @@ class MultiPortfolioEditDialog extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.check,
+          icon: Icon(Icons.close,
               color: Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
           onPressed: () {
             Navigator.pop(context);

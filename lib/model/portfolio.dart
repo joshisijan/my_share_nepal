@@ -9,6 +9,14 @@ class Portfolio {
     await db.close();
   }
 
+  updatePortfolio(PortfolioModel portfolioModel) async {
+    print(portfolioModel.purchaseDate.toString());
+    Database db = await AppDatabase().openAppDatabase();
+    await db.update('Portfolio', portfolioModel.toMap(),
+        where: 'id = ?', whereArgs: [portfolioModel.id]);
+    await db.close();
+  }
+
   Future<List<PortfolioModel>> getPortfolio() async {
     Database db = await AppDatabase().openAppDatabase();
     List<Map<String, dynamic>> result = await db.query('Portfolio');

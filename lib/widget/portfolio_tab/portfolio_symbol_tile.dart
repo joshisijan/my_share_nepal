@@ -9,9 +9,12 @@ import 'package:my_share_nepal/model/symbol_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_share_nepal/reusable/custom_popup_menu_button.dart';
 import 'package:my_share_nepal/reusable/custom_popup_menu_item.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/detail_portfolio_dialog.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/edit_portfolio_dialog.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/multi_portfolio_detail_dialog.dart';
 import 'package:my_share_nepal/widget/portfolio_tab/multi_portfolio_edit_dialog.dart';
 import 'package:my_share_nepal/widget/portfolio_tab/multi_portfolio_remove_dialog.dart';
-import 'package:my_share_nepal/widget/portfolio_tab/portfolio_remove_dialog.dart';
+import 'package:my_share_nepal/widget/portfolio_tab/remove_portfolio_dialog.dart';
 
 class PortfolioSymbolTile extends StatelessWidget {
   final PortfolioModel portfolioModel;
@@ -21,7 +24,7 @@ class PortfolioSymbolTile extends StatelessWidget {
     required this.id,
   });
   final NumberFormat numberFormat =
-      NumberFormat("##,##,##,##,##,##,##,###0.0#", "en_US");
+      NumberFormat("##,##,##,##,##,##,##,###.0#", "en_US");
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +41,7 @@ class PortfolioSymbolTile extends StatelessWidget {
               CustomPopupMenuButton(
                 onSelected: (value) {
                   if (value == 0) {
+                    showPortfolioDetailDialog(context);
                   } else if (value == 1) {
                     showPortfolioEditDialog(context);
                   } else if (value == 2) {
@@ -50,7 +54,7 @@ class PortfolioSymbolTile extends StatelessWidget {
                       value: 0,
                       child: CustomPopupMenuItem(
                         icon: Icons.feed,
-                        title: 'Summarize',
+                        title: 'Detail',
                       ),
                     ),
                     PopupMenuItem(
@@ -203,8 +207,8 @@ class PortfolioSymbolTile extends StatelessWidget {
               context.read<PortfolioCubit>().removeFromPortfolio(id ?? 0);
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(normalSnackBar(
-                context,
-                'Successfully removed from portfolio.',
+                context: context,
+                content: 'Successfully removed from portfolio.',
               ));
             },
           );
@@ -227,7 +231,35 @@ class PortfolioSymbolTile extends StatelessWidget {
         },
       );
     } else {
-      // Navigate to edit page
+      showDialog(
+        context: context,
+        builder: (context) {
+          return EditPortfolioDialog(
+            portfolioModel: portfolioModel,
+          );
+        },
+      );
+    }
+  }
+
+  showPortfolioDetailDialog(BuildContext context) async {
+    List<PortfolioModel> portfolioModels =
+        await Portfolio().getForMultiSymbols(portfolioModel.symbolId);
+    // if portfolio have same share added multiple time
+    if (portfolioModels.length > 1) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return MultiPortfolioDetailDialog(symbolId: portfolioModel.symbolId);
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return DetailPortfolioDialog(portfolioModel: portfolioModel);
+        },
+      );
     }
   }
 }
