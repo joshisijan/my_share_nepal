@@ -22,143 +22,63 @@ class _SettingTabState extends State<SettingTab> {
         children: [
           Text(
             'Settings',
-            style: Theme.of(context).textTheme.headline3!.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-                  fontWeight: FontWeight.bold,
-                ),
+            style: Theme.of(context).textTheme.headline4,
           ),
           SizedBox(
             height: kDefaultPadding,
           ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: kDefaultPadding / 2),
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: kDefaultPadding / 2,
-                    horizontal: kDefaultPadding,
-                  ),
-                  child: Text(
-                    'Apperance',
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onPrimary
-                              .withAlpha(200),
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                ),
-                Divider(
-                  color: Theme.of(context).primaryColorDark,
-                ),
-                SettingListTile(
-                  icon: Icons.dark_mode,
-                  title: 'Dark Mode',
-                  trailing: Switch(
-                    value: isDarkTheme,
-                    onChanged: (value) {
-                      context.read<ThemeCubit>().toggleDarkTheme();
-                    },
-                  ),
-                ),
-                SettingListTile(
-                  icon: Icons.palette,
-                  title: 'App Color',
-                  trailing: MaterialButton(
-                    child: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(200),
-                    ),
-                    onPressed: null,
-                  ),
-                ),
-                AppColorList(),
-              ],
+          Text(
+            'Apperance',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          Divider(),
+          SettingListTile(
+            icon: Icons.dark_mode,
+            title: 'Dark Mode',
+            onTap: () {
+              context.read<ThemeCubit>().toggleDarkTheme();
+            },
+            trailing: Switch(
+              value: isDarkTheme,
+              onChanged: (value) {
+                context.read<ThemeCubit>().toggleDarkTheme();
+              },
             ),
           ),
+          SettingListTile(
+            icon: Icons.palette,
+            title: 'App Color',
+            trailing: MaterialButton(
+              child: Icon(
+                Icons.keyboard_arrow_down,
+                color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+              ),
+              onPressed: null,
+            ),
+          ),
+          AppColorList(),
           SizedBox(
             height: kDefaultPadding,
           ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: kDefaultPadding / 2),
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: kDefaultPadding / 2,
-                    horizontal: kDefaultPadding,
-                  ),
-                  child: Text(
-                    'Information',
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onPrimary
-                              .withAlpha(200),
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                ),
-                Divider(
-                  color: Theme.of(context).primaryColorDark,
-                ),
-                SettingListTile(
-                  icon: Icons.info,
-                  title: 'About Us',
-                  trailing: MaterialButton(
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(200),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-                SettingListTile(
-                  icon: Icons.groups,
-                  title: 'Contributors',
-                  trailing: MaterialButton(
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(200),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-                SettingListTile(
-                  icon: Icons.source,
-                  title: 'Data Source',
-                  trailing: MaterialButton(
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(200),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-              ],
-            ),
+          Text(
+            'Informations',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          Divider(),
+          SettingListTile(
+            icon: Icons.info,
+            title: 'About Us',
+            onTap: () {},
+          ),
+          SettingListTile(
+            icon: Icons.groups,
+            title: 'Contributors',
+            onTap: () {},
+          ),
+          SettingListTile(
+            icon: Icons.source,
+            title: 'Data Source',
+            onTap: () {},
           ),
           SizedBox(
             height: kDefaultPadding * 2,

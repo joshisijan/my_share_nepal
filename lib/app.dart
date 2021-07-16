@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_share_nepal/reusable/custom_button.dart';
 import 'package:my_share_nepal/screen/search_page.dart';
 import 'package:my_share_nepal/tab/home_tab.dart';
 import 'package:my_share_nepal/tab/portfolio_tab.dart';
@@ -31,11 +30,9 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColorDark,
       floatingActionButton: _bottomNavigationBarIndex == 2
-          ? CustomButton(
-              isIconButton: true,
-              icon: Icons.add,
+          ? IconButton(
+              icon: Icon(Icons.add),
               onPressed: () {
                 showSearch(
                   context: context,
@@ -81,11 +78,6 @@ class _AppState extends State<App> {
           _appBasePageController.jumpToPage(index);
         },
         selectedFontSize: 12.0,
-        backgroundColor: Theme.of(context).primaryColor,
-        unselectedItemColor:
-            Theme.of(context).colorScheme.onPrimary.withAlpha(100),
-        selectedItemColor:
-            Theme.of(context).colorScheme.onPrimary.withAlpha(200),
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),

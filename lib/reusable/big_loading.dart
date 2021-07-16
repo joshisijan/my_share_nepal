@@ -10,18 +10,13 @@ class BigLoading extends StatelessWidget {
           SizedBox(
             height: kDefaultPadding * 4,
           ),
-          CircularProgressIndicator(
-            color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-          ),
+          CircularProgressIndicator(),
           SizedBox(
             height: kDefaultPadding,
           ),
           Text(
             'Loading...',
-            style: Theme.of(context).textTheme.headline5!.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-                  fontWeight: FontWeight.bold,
-                ),
+            style: Theme.of(context).textTheme.headline5,
           ),
         ],
       ),

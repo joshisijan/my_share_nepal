@@ -7,7 +7,6 @@ import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/helper/utilities.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
-import 'package:my_share_nepal/reusable/custom_button.dart';
 import 'package:my_share_nepal/reusable/custom_form_field.dart';
 
 class AddPortfolioDialog extends StatefulWidget {
@@ -16,7 +15,7 @@ class AddPortfolioDialog extends StatefulWidget {
     required this.symbol,
   });
   final NumberFormat numberFormat =
-      NumberFormat("##,##,##,##,##,##,##,###.0#", "en_US");
+      NumberFormat("##,##,##,##,##,##,##,##0.0#", "en_US");
   final DateFormat dateFormat = DateFormat.yMMMMd('en_US');
   final RegExp digitAndDotRegExp = RegExp(r'^\d+\.?\d{0,2}');
   @override
@@ -186,10 +185,10 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
                                 .withAlpha(150),
                           ),
                     ),
-              CustomButton(
-                text: purchaseDate == null
-                    ? 'Select Purchase Date'
-                    : 'Change Purchase Date',
+              MaterialButton(
+                child: purchaseDate == null
+                    ? Text('Select Purchase DateText')
+                    : Text('Change Purchase Date'),
                 onPressed: () async {
                   purchaseDate = await showDatePicker(
                     context: context,
@@ -207,14 +206,14 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
           ),
         ),
         actions: [
-          CustomButton(
-            text: 'Add',
+          MaterialButton(
+            child: Text('Add'),
             onPressed: () {
               addPortfolio();
             },
           ),
-          CustomButton(
-            text: 'Cancel',
+          MaterialButton(
+            child: Text('Cancel'),
             onPressed: () {
               Navigator.pop(context);
             },

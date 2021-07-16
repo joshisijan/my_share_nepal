@@ -28,8 +28,8 @@ class NothingFound extends StatelessWidget {
             this.icon,
             size: kExtraLargeIconSize,
             color: isError
-                ? Colors.red
-                : Theme.of(context).colorScheme.onPrimary.withAlpha(150),
+                ? Theme.of(context).errorColor
+                : Theme.of(context).textTheme.headline1!.color,
           ),
           SizedBox(
             height: kDefaultPadding,
@@ -39,8 +39,8 @@ class NothingFound extends StatelessWidget {
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headline5!.copyWith(
                   color: isError
-                      ? Colors.red
-                      : Theme.of(context).colorScheme.onPrimary.withAlpha(150),
+                      ? Theme.of(context).errorColor
+                      : Theme.of(context).textTheme.headline1!.color,
                   fontWeight: FontWeight.bold,
                 ),
           ),
@@ -49,8 +49,8 @@ class NothingFound extends StatelessWidget {
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.overline!.copyWith(
                   color: isError
-                      ? Colors.red
-                      : Theme.of(context).colorScheme.onPrimary.withAlpha(150),
+                      ? Theme.of(context).errorColor
+                      : Theme.of(context).textTheme.headline1!.color,
                   fontWeight: FontWeight.bold,
                 ),
           ),

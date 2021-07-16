@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:my_share_nepal/app.dart';
 import 'package:my_share_nepal/cubit/fetch_symbols_cubit.dart';
 import 'package:my_share_nepal/cubit/portfolio_cubit.dart';

@@ -12,10 +12,7 @@ class ToolsTab extends StatelessWidget {
         children: [
           Text(
             'Tools',
-            style: Theme.of(context).textTheme.headline3!.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-                  fontWeight: FontWeight.bold,
-                ),
+            style: Theme.of(context).textTheme.headline4,
           ),
           SizedBox(
             height: kDefaultPadding,

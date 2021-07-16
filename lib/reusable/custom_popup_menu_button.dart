@@ -12,13 +12,9 @@ class CustomPopupMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(kDefaultPadding),
+        borderRadius: BorderRadius.circular(kDefaultBorderRadius),
       ),
-      icon: Icon(
-        Icons.more_vert,
-        color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-      ),
-      color: Theme.of(context).primaryColorLight,
+      icon: Icon(Icons.more_vert),
       onSelected: onSelected,
       itemBuilder: itemBuilder,
     );

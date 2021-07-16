@@ -9,6 +9,7 @@ import 'package:my_share_nepal/model/symbol_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_share_nepal/reusable/custom_popup_menu_button.dart';
 import 'package:my_share_nepal/reusable/custom_popup_menu_item.dart';
+import 'package:my_share_nepal/screen/symbol_detail_page.dart';
 import 'package:my_share_nepal/widget/portfolio_tab/detail_portfolio_dialog.dart';
 import 'package:my_share_nepal/widget/portfolio_tab/edit_portfolio_dialog.dart';
 import 'package:my_share_nepal/widget/portfolio_tab/multi_portfolio_detail_dialog.dart';
@@ -24,7 +25,7 @@ class PortfolioSymbolTile extends StatelessWidget {
     required this.id,
   });
   final NumberFormat numberFormat =
-      NumberFormat("##,##,##,##,##,##,##,###.0#", "en_US");
+      NumberFormat("##,##,##,##,##,##,##,##0.0#", "en_US");
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +42,16 @@ class PortfolioSymbolTile extends StatelessWidget {
               CustomPopupMenuButton(
                 onSelected: (value) {
                   if (value == 0) {
-                    showPortfolioDetailDialog(context);
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => SymbolDetailPage(
+                        symbolModel: symbolModel,
+                      ),
+                    ));
                   } else if (value == 1) {
-                    showPortfolioEditDialog(context);
+                    showPortfolioDetailDialog(context);
                   } else if (value == 2) {
+                    showPortfolioEditDialog(context);
+                  } else if (value == 3) {
                     showPortfolioRemoveDialog(context);
                   }
                 },
@@ -60,12 +67,19 @@ class PortfolioSymbolTile extends StatelessWidget {
                     PopupMenuItem(
                       value: 1,
                       child: CustomPopupMenuItem(
+                        icon: Icons.summarize_outlined,
+                        title: 'Portfolio Detail',
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 2,
+                      child: CustomPopupMenuItem(
                         icon: Icons.edit,
                         title: 'Edit',
                       ),
                     ),
                     PopupMenuItem(
-                      value: 2,
+                      value: 3,
                       child: CustomPopupMenuItem(
                         icon: Icons.delete,
                         title: 'Remove',

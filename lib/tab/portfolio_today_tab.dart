@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
-import 'package:my_share_nepal/widget/portfolio_tab/portfolio_symbol_tile.dart';
+import 'package:my_share_nepal/reusable/portfolio_tab/portfolio_symbol_tile.dart';
 
 class PortfolioTodayTab extends StatelessWidget {
   final List<PortfolioModel> portfolioModels;

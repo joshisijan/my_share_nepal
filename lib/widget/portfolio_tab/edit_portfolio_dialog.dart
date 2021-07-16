@@ -6,7 +6,6 @@ import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/helper/utilities.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';
-import 'package:my_share_nepal/reusable/custom_button.dart';
 import 'package:my_share_nepal/reusable/custom_form_field.dart';
 
 class EditPortfolioDialog extends StatefulWidget {
@@ -15,7 +14,7 @@ class EditPortfolioDialog extends StatefulWidget {
     required this.portfolioModel,
   });
   final NumberFormat numberFormat =
-      NumberFormat("##,##,##,##,##,##,##,###.0#", "en_US");
+      NumberFormat("##,##,##,##,##,##,##,##0.0#", "en_US");
   final DateFormat dateFormat = DateFormat.yMMMMd('en_US');
   final RegExp digitAndDotRegExp = RegExp(r'^\d+\.?\d{0,2}');
   @override
@@ -183,8 +182,8 @@ class _EditPortfolioDialogState extends State<EditPortfolioDialog> {
                           .withAlpha(150),
                     ),
               ),
-              CustomButton(
-                text: 'Change Purchase Date',
+              MaterialButton(
+                child: Text('Change Purchase Date'),
                 onPressed: () async {
                   purchaseDate = await showDatePicker(
                         context: context,
@@ -204,14 +203,14 @@ class _EditPortfolioDialogState extends State<EditPortfolioDialog> {
           ),
         ),
         actions: [
-          CustomButton(
-            text: 'Edit',
+          MaterialButton(
+            child: Text('Edit'),
             onPressed: () {
               editPortfolio();
             },
           ),
-          CustomButton(
-            text: 'Cancel',
+          MaterialButton(
+            child: Text('Cancel'),
             onPressed: () {
               Navigator.pop(context);
             },

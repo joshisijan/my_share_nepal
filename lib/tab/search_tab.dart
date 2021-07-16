@@ -13,37 +13,25 @@ class SearchTab extends StatelessWidget {
         children: [
           Text(
             'Search',
-            style: Theme.of(context).textTheme.headline3!.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-                  fontWeight: FontWeight.bold,
-                ),
+            style: Theme.of(context).textTheme.headline4,
           ),
           SizedBox(
             height: kDefaultPadding,
           ),
-          MaterialButton(
-            color: Theme.of(context).primaryColorLight,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(kDefaultBorderRadius * 2),
+          Container(
+            color: Theme.of(context).buttonColor,
+            child: TextButton.icon(
+              icon: Icon(Icons.search),
+              label: Text('Search...'),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchPage(
+                    searchIndex: 0,
+                  ),
+                );
+              },
             ),
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: kDefaultPadding * 0.8),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Search...',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColorDark,
-                ),
-              ),
-            ),
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: SearchPage(
-                  searchIndex: 0, //redirects with more option in tile
-                ),
-              );
-            },
           ),
           SizedBox(
             height: kDefaultPadding,

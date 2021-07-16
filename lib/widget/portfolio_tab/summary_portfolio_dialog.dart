@@ -15,7 +15,7 @@ class SummaryPortfolioDialog extends StatelessWidget {
   });
 
   final NumberFormat numberFormat =
-      NumberFormat("##,##,##,##,##,##,##,###.0#", "en_US");
+      NumberFormat("##,##,##,##,##,##,##,##0.0#", "en_US");
   final DateFormat dateFormat = DateFormat.yMMMMd('en_US');
   @override
   Widget build(BuildContext context) {

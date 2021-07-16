@@ -4,8 +4,7 @@ import 'package:my_share_nepal/cubit/symbols_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/reusable/big_loading.dart';
-import 'package:my_share_nepal/reusable/custom_button.dart';
-import 'package:my_share_nepal/reusable/search_symbol_tile.dart';
+import 'package:my_share_nepal/reusable/search_tab/search_symbol_tile.dart';
 import 'package:my_share_nepal/widget/portfolio_tab/add_portfolio_dialog.dart';
 import 'package:my_share_nepal/widget/search_tab/no_search_result.dart';
 
@@ -20,7 +19,6 @@ class SearchPage extends SearchDelegate {
       IconButton(
         icon: Icon(
           Icons.clear,
-          color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
         ),
         onPressed: () {
           query = '';
@@ -31,43 +29,28 @@ class SearchPage extends SearchDelegate {
 
   @override
   Widget buildLeading(BuildContext context) {
-    return BackButton(
-      color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-    );
+    return BackButton();
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
     return query == ''
-        ? Container(
-            width: double.maxFinite,
-            padding: EdgeInsets.symmetric(
-                horizontal: kDefaultPadding, vertical: kDefaultPadding / 2),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: CustomButton(
-                    text: 'Show all',
-                    onPressed: () {
-                      query = '';
-                      showResults(context);
-                    },
-                  ),
-                ),
-              ],
+        ? Align(
+            alignment: Alignment.topCenter,
+            child: MaterialButton(
+              child: Text('Show all'),
+              onPressed: () {
+                query = '';
+                showResults(context);
+              },
             ),
           )
-        : Container(
-            color: Theme.of(context).primaryColorDark,
-          );
+        : SizedBox.shrink();
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    if (query != '') {
-      // add code for recent search
-    }
+    query = query.trim();
     context.read<SymbolsCubit>().findSymbols(query);
     return Container(
       child: ListView(
@@ -85,15 +68,14 @@ class SearchPage extends SearchDelegate {
                   return NoSearchResult();
                 }
                 return Column(
-                  children: symbolsState.symbols.map<Widget>((symbol) {
+                  children: symbolsState.symbols.map<Widget>((symbolModel) {
                         return SearchSymbolTile(
-                          searchIndex: searchIndex,
-                          title: symbol.symbol,
+                          symbolModel: symbolModel,
                           onAdd: () {
                             showDialog(
                               context: context,
                               builder: (_) {
-                                return AddPortfolioDialog(symbol: symbol);
+                                return AddPortfolioDialog(symbol: symbolModel);
                               },
                             );
                           },
@@ -101,10 +83,7 @@ class SearchPage extends SearchDelegate {
                       }).toList() +
                       (symbolsState.symbols.length > 0
                           ? [
-                              Divider(
-                                color: Theme.of(context).primaryColorLight,
-                                height: 0.0,
-                              ),
+                              Divider(height: 0.0),
                             ]
                           : []),
                 );
@@ -115,34 +94,6 @@ class SearchPage extends SearchDelegate {
           ),
         ],
       ),
-    );
-  }
-
-  @override
-  ThemeData appBarTheme(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return theme.copyWith(
-      inputDecorationTheme: InputDecorationTheme(
-        border: InputBorder.none,
-      ),
-      scaffoldBackgroundColor: theme.primaryColorDark,
-      primaryColor: theme.primaryColor,
-      colorScheme: theme.colorScheme.copyWith(
-        primary: theme.primaryColor,
-      ),
-      textSelectionTheme: theme.brightness == Brightness.dark
-          ? TextSelectionThemeData(
-              selectionColor: Theme.of(context).buttonColor,
-              cursorColor: Theme.of(context).buttonColor,
-            )
-          : theme.textSelectionTheme,
-      hintColor: theme.colorScheme.onPrimary.withAlpha(120),
-      textTheme: theme.textTheme.copyWith(
-        headline6: TextStyle(
-          color: theme.colorScheme.onPrimary.withAlpha(200),
-        ),
-      ),
-      appBarTheme: AppBarTheme(brightness: Brightness.dark),
     );
   }
 }
