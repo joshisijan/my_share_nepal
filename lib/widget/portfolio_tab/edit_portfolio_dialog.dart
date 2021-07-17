@@ -44,7 +44,6 @@ class _EditPortfolioDialogState extends State<EditPortfolioDialog> {
     return Form(
       key: _formKey,
       child: AlertDialog(
-        backgroundColor: Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(kDefaultBorderRadius),
         ),
@@ -53,21 +52,11 @@ class _EditPortfolioDialogState extends State<EditPortfolioDialog> {
             children: [
               TextSpan(
                 text: 'Edit portfolio',
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.headline6,
               ),
               TextSpan(
                 text: '\nScroll if options hidden.',
-                style: Theme.of(context).textTheme.overline!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.overline,
               ),
             ],
           ),
@@ -79,34 +68,18 @@ class _EditPortfolioDialogState extends State<EditPortfolioDialog> {
             children: [
               Text(
                 'Symbol',
-                style: Theme.of(context).textTheme.caption!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.caption,
               ),
               Text(
                 widget.portfolioModel.symbolModel!.symbol,
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: Theme.of(context).textTheme.bodyText1,
               ),
               SizedBox(
                 height: kDefaultPadding / 2,
               ),
               Text(
                 'Purchase Price',
-                style: Theme.of(context).textTheme.caption!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.caption,
               ),
               SizedBox(
                 height: kDefaultPadding / 4,
@@ -134,12 +107,7 @@ class _EditPortfolioDialogState extends State<EditPortfolioDialog> {
               ),
               Text(
                 'No. of share',
-                style: Theme.of(context).textTheme.caption!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.caption,
               ),
               SizedBox(
                 height: kDefaultPadding / 4,
@@ -165,25 +133,16 @@ class _EditPortfolioDialogState extends State<EditPortfolioDialog> {
               ),
               Text(
                 'Purchase Date',
-                style: Theme.of(context).textTheme.caption!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.caption,
               ),
               Text(
                 widget.dateFormat
                     .format(purchaseDate ?? widget.portfolioModel.purchaseDate),
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.headline6,
               ),
               MaterialButton(
                 child: Text('Change Purchase Date'),
+                textColor: Theme.of(context).primaryColor,
                 onPressed: () async {
                   purchaseDate = await showDatePicker(
                         context: context,
@@ -211,6 +170,7 @@ class _EditPortfolioDialogState extends State<EditPortfolioDialog> {
           ),
           MaterialButton(
             child: Text('Cancel'),
+            textColor: Theme.of(context).errorColor,
             onPressed: () {
               Navigator.pop(context);
             },

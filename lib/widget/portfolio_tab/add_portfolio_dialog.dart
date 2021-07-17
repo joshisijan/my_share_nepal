@@ -41,7 +41,6 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
     return Form(
       key: _formKey,
       child: AlertDialog(
-        backgroundColor: Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(kDefaultBorderRadius),
         ),
@@ -50,21 +49,11 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
             children: [
               TextSpan(
                 text: 'Add to portfolio',
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.headline6,
               ),
               TextSpan(
                 text: '\nScroll if options hidden.',
-                style: Theme.of(context).textTheme.overline!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.overline,
               ),
             ],
           ),
@@ -76,20 +65,11 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
             children: [
               Text(
                 'Symbol',
-                style: Theme.of(context).textTheme.caption!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.caption,
               ),
               Text(
                 widget.symbol.symbol,
                 style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
                       fontWeight: FontWeight.bold,
                     ),
               ),
@@ -98,12 +78,7 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
               ),
               Text(
                 'Purchase Price',
-                style: Theme.of(context).textTheme.caption!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.caption,
               ),
               SizedBox(
                 height: kDefaultPadding / 4,
@@ -131,12 +106,7 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
               ),
               Text(
                 'No. of share',
-                style: Theme.of(context).textTheme.caption!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.caption,
               ),
               SizedBox(
                 height: kDefaultPadding / 4,
@@ -162,33 +132,24 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
               ),
               Text(
                 'Purchase Date',
-                style: Theme.of(context).textTheme.caption!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
-                    ),
+                style: Theme.of(context).textTheme.caption,
               ),
               purchaseDate == null
                   ? Text(
                       'Date and Time not selected so today\'s date and time will be choosen.',
                       style: Theme.of(context).textTheme.overline!.copyWith(
-                            color: Colors.red,
+                            color: Theme.of(context).errorColor,
                           ),
                     )
                   : Text(
                       widget.dateFormat.format(purchaseDate ?? DateTime.now()),
-                      style: Theme.of(context).textTheme.headline6!.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimary
-                                .withAlpha(150),
-                          ),
+                      style: Theme.of(context).textTheme.headline6,
                     ),
               MaterialButton(
                 child: purchaseDate == null
                     ? Text('Select Purchase DateText')
                     : Text('Change Purchase Date'),
+                textColor: Theme.of(context).primaryColor,
                 onPressed: () async {
                   purchaseDate = await showDatePicker(
                     context: context,
@@ -214,6 +175,7 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
           ),
           MaterialButton(
             child: Text('Cancel'),
+            textColor: Theme.of(context).errorColor,
             onPressed: () {
               Navigator.pop(context);
             },

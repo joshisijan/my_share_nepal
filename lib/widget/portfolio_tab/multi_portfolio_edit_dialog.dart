@@ -20,7 +20,6 @@ class MultiPortfolioEditDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<PortfolioMultiSymbolsCubit>().getForMultiSymbols(symbolId);
     return AlertDialog(
-      backgroundColor: Theme.of(context).primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
       ),
@@ -29,17 +28,11 @@ class MultiPortfolioEditDialog extends StatelessWidget {
           children: [
             TextSpan(
               text: 'Which one to edit?',
-              style: Theme.of(context).textTheme.headline6!.copyWith(
-                    color:
-                        Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-                  ),
+              style: Theme.of(context).textTheme.headline6,
             ),
             TextSpan(
               text: '\nScroll if options hidden.\nPress edit button to edit.',
-              style: Theme.of(context).textTheme.overline!.copyWith(
-                    color:
-                        Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-                  ),
+              style: Theme.of(context).textTheme.overline,
             )
           ],
         ),
@@ -80,130 +73,84 @@ class MultiPortfolioEditDialog extends StatelessWidget {
                   Column(
                     verticalDirection: VerticalDirection.up,
                     children: portfolioModels.map<Widget>((portfolioModel) {
-                      return Container(
-                        margin: EdgeInsets.only(bottom: kDefaultPadding),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context)
-                              .primaryColorLight
-                              .withAlpha(150),
-                          borderRadius:
-                              BorderRadius.circular(kDefaultBorderRadius),
-                        ),
-                        child: ListTile(
-                          contentPadding: EdgeInsets.all(kDefaultPadding),
-                          dense: true,
-                          isThreeLine: true,
-                          title: Text(
-                            portfolioModel.symbolModel!.symbol,
-                            style:
-                                Theme.of(context).textTheme.headline6!.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onPrimary
-                                          .withAlpha(150),
-                                      fontWeight: FontWeight.bold,
+                      return Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(bottom: kDefaultPadding),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(kDefaultBorderRadius),
+                            ),
+                            child: ListTile(
+                              contentPadding: EdgeInsets.all(kDefaultPadding),
+                              dense: true,
+                              isThreeLine: true,
+                              title: Text(
+                                portfolioModel.symbolModel!.symbol,
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                              subtitle: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'Number of share:',
+                                      style:
+                                          Theme.of(context).textTheme.overline,
                                     ),
-                          ),
-                          subtitle: RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'Number of share:',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .overline!
-                                      .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary
-                                            .withAlpha(150),
-                                      ),
+                                    TextSpan(
+                                      text: '\n' +
+                                          portfolioModel.quantity.toString(),
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                    TextSpan(
+                                      text: '\nPurchase Price:',
+                                      style:
+                                          Theme.of(context).textTheme.overline,
+                                    ),
+                                    TextSpan(
+                                      text: '\n' +
+                                          portfolioModel.purchasePrice
+                                              .toString(),
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                    TextSpan(
+                                      text: '\nPurchase Date: ',
+                                      style:
+                                          Theme.of(context).textTheme.overline,
+                                    ),
+                                    TextSpan(
+                                      text: '\n' +
+                                          dateFormat.format(
+                                              portfolioModel.purchaseDate),
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                  ],
                                 ),
-                                TextSpan(
-                                  text:
-                                      '\n' + portfolioModel.quantity.toString(),
-                                  style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimary
-                                        .withAlpha(150),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: '\nPurchase Price:',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .overline!
-                                      .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary
-                                            .withAlpha(150),
-                                      ),
-                                ),
-                                TextSpan(
-                                  text: '\n' +
-                                      portfolioModel.purchasePrice.toString(),
-                                  style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimary
-                                        .withAlpha(150),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: '\nPurchase Date: ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .overline!
-                                      .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary
-                                            .withAlpha(150),
-                                      ),
-                                ),
-                                TextSpan(
-                                  text: '\n' +
-                                      dateFormat
-                                          .format(portfolioModel.purchaseDate),
-                                  style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimary
-                                        .withAlpha(150),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          leading: IconButton(
-                            icon: Icon(
-                              Icons.edit,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary
-                                  .withAlpha(150),
-                            ),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return EditPortfolioDialog(
-                                    portfolioModel: portfolioModel,
-                                  );
+                              ),
+                              leading: IconButton(
+                                icon: Icon(Icons.edit),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return EditPortfolioDialog(
+                                        portfolioModel: portfolioModel,
+                                      );
+                                    },
+                                  ).then((value) {
+                                    context
+                                        .read<PortfolioMultiSymbolsCubit>()
+                                        .getForMultiSymbols(symbolId);
+                                  });
                                 },
-                              ).then((value) {
-                                context
-                                    .read<PortfolioMultiSymbolsCubit>()
-                                    .getForMultiSymbols(symbolId);
-                              });
-                            },
+                              ),
+                            ),
                           ),
-                        ),
+                          Divider(height: 0.0),
+                        ],
                       );
                     }).toList(),
                   ),

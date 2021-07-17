@@ -8,7 +8,6 @@ import 'package:my_share_nepal/model/portfolio_model.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_share_nepal/reusable/custom_popup_menu_button.dart';
-import 'package:my_share_nepal/reusable/custom_popup_menu_item.dart';
 import 'package:my_share_nepal/screen/symbol_detail_page.dart';
 import 'package:my_share_nepal/widget/portfolio_tab/detail_portfolio_dialog.dart';
 import 'package:my_share_nepal/widget/portfolio_tab/edit_portfolio_dialog.dart';
@@ -59,30 +58,34 @@ class PortfolioSymbolTile extends StatelessWidget {
                   return [
                     PopupMenuItem(
                       value: 0,
-                      child: CustomPopupMenuItem(
-                        icon: Icons.feed,
-                        title: 'Detail',
+                      child: ListTile(
+                        leading: Icon(Icons.feed),
+                        title: Text('Detail'),
+                        dense: true,
                       ),
                     ),
                     PopupMenuItem(
                       value: 1,
-                      child: CustomPopupMenuItem(
-                        icon: Icons.summarize_outlined,
-                        title: 'Portfolio Detail',
+                      child: ListTile(
+                        leading: Icon(Icons.summarize_outlined),
+                        title: Text('Portfolio Detail'),
+                        dense: true,
                       ),
                     ),
                     PopupMenuItem(
                       value: 2,
-                      child: CustomPopupMenuItem(
-                        icon: Icons.edit,
-                        title: 'Edit',
+                      child: ListTile(
+                        leading: Icon(Icons.edit),
+                        title: Text('Edit'),
+                        dense: true,
                       ),
                     ),
                     PopupMenuItem(
                       value: 3,
-                      child: CustomPopupMenuItem(
-                        icon: Icons.delete,
-                        title: 'Remove',
+                      child: ListTile(
+                        leading: Icon(Icons.delete),
+                        title: Text('Remove'),
+                        dense: true,
                       ),
                     ),
                   ];

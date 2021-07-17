@@ -28,33 +28,11 @@ class CustomFormField extends StatelessWidget {
           horizontal: kDefaultPadding,
           vertical: 0.0,
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.onPrimary.withAlpha(100),
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Theme.of(context).errorColor.withAlpha(120),
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Theme.of(context).errorColor,
-          ),
-        ),
+        enabledBorder: OutlineInputBorder(),
+        focusedBorder: OutlineInputBorder(),
+        errorBorder: OutlineInputBorder(),
+        focusedErrorBorder: OutlineInputBorder(),
         hintText: hint,
-        hintStyle: TextStyle(
-          color: Theme.of(context).colorScheme.onPrimary.withAlpha(100),
-        ),
-      ),
-      style: TextStyle(
-        color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
       ),
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_share_nepal/cubit/symbols_cubit.dart';
-import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/reusable/big_loading.dart';
 import 'package:my_share_nepal/reusable/search_tab/search_symbol_tile.dart';

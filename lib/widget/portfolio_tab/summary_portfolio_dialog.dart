@@ -20,56 +20,36 @@ class SummaryPortfolioDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Theme.of(context).primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
       ),
-      title: Text(
-        'Portfolio Summary',
-        style: TextStyle(
-            color: Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
-      ),
+      title: Text('Portfolio Summary'),
       content: RichText(
         text: TextSpan(
           children: [
             TextSpan(
               text: 'Total Today\'s Value',
-              style: Theme.of(context).textTheme.caption!.copyWith(
-                  color:
-                      Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
+              style: Theme.of(context).textTheme.caption,
             ),
             TextSpan(
               text: '\n' + numberFormat.format(value),
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             TextSpan(
               text: '\n\nTotal Investment',
-              style: Theme.of(context).textTheme.caption!.copyWith(
-                  color:
-                      Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
+              style: Theme.of(context).textTheme.caption,
             ),
             TextSpan(
               text: '\n' + numberFormat.format(investment),
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             TextSpan(
               text: '\n\nTotal Number of Share',
-              style: Theme.of(context).textTheme.caption!.copyWith(
-                  color:
-                      Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
+              style: Theme.of(context).textTheme.caption,
             ),
             TextSpan(
               text: '\n' + numberFormat.format(totalShare),
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(150),
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             TextSpan(
               text: difference == 0
@@ -79,7 +59,7 @@ class SummaryPortfolioDialog extends StatelessWidget {
                       : '\n\nTotal Profit',
               style: Theme.of(context).textTheme.caption!.copyWith(
                     color: difference == 0
-                        ? Theme.of(context).colorScheme.onPrimary.withAlpha(150)
+                        ? null
                         : difference < 0
                             ? Colors.red
                             : Colors.green,
@@ -89,7 +69,7 @@ class SummaryPortfolioDialog extends StatelessWidget {
               text: '\n' + numberFormat.format(difference),
               style: TextStyle(
                 color: difference == 0
-                    ? Theme.of(context).colorScheme.onPrimary.withAlpha(150)
+                    ? null
                     : difference < 0
                         ? Colors.red
                         : Colors.green,
@@ -101,8 +81,7 @@ class SummaryPortfolioDialog extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.check,
-              color: Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
+          icon: Icon(Icons.check),
           onPressed: () {
             Navigator.pop(context);
           },
