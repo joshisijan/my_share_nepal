@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:my_share_nepal/model/symbol.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
 
-part 'symbols_state.dart';
+part '../symbols/symbols_state.dart';
 
 class SymbolsCubit extends Cubit<SymbolsState> {
   SymbolsCubit() : super(SymbolsInitial());

@@ -6,16 +6,19 @@ class NothingFound extends StatelessWidget {
   final String title;
   final String text;
   final bool isError;
+  final Function()? onReload;
 
   NothingFound({
     required this.icon,
     required this.title,
     required this.text,
     this.isError = false,
+    this.onReload,
   });
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.maxFinite,
       padding: EdgeInsets.symmetric(
         horizontal: kDefaultPadding * 2,
       ),
@@ -54,6 +57,24 @@ class NothingFound extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
           ),
+          onReload != null
+              ? SizedBox(height: kDefaultPadding)
+              : SizedBox.shrink(),
+          onReload != null
+              ? TextButton.icon(
+                  icon: Icon(
+                    Icons.refresh,
+                    color: Theme.of(context).errorColor,
+                  ),
+                  label: Text(
+                    'Reload',
+                    style: TextStyle(
+                      color: Theme.of(context).errorColor,
+                    ),
+                  ),
+                  onPressed: onReload,
+                )
+              : SizedBox.shrink(),
         ],
       ),
     );

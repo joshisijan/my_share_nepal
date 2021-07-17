@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
-import 'package:my_share_nepal/cubit/portfolio_multi_symbols_cubit.dart';
+import 'package:my_share_nepal/cubit/portfolio/portfolio_cubit.dart';
+import 'package:my_share_nepal/cubit/portfolio/portfolio_multi_symbols_cubit.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/helper/utilities.dart';
 import 'package:my_share_nepal/model/portfolio_model.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_share_nepal/cubit/symbols_cubit.dart';
+import 'package:my_share_nepal/cubit/symbols/symbols_cubit.dart';
+import 'package:my_share_nepal/cubit/tools/cubit/symbol_comparison_cubit.dart';
 import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/reusable/big_loading.dart';
 import 'package:my_share_nepal/reusable/search_tab/search_symbol_tile.dart';
@@ -71,6 +72,12 @@ class SearchPage extends SearchDelegate {
                                 return AddPortfolioDialog(symbol: symbolModel);
                               },
                             );
+                          },
+                          onCompare: () async {
+                            context
+                                .read<SymbolComparisonCubit>()
+                                .addSymbol(symbolModel);
+                            Navigator.pop(context);
                           },
                         );
                       }).toList() +

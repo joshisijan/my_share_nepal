@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/app.dart';
-import 'package:my_share_nepal/cubit/fetch_symbols_cubit.dart';
-import 'package:my_share_nepal/cubit/portfolio_cubit.dart';
-import 'package:my_share_nepal/cubit/portfolio_multi_symbols_cubit.dart';
-import 'package:my_share_nepal/cubit/symbols_cubit.dart';
+import 'package:my_share_nepal/cubit/portfolio/portfolio_cubit.dart';
+import 'package:my_share_nepal/cubit/symbols/fetch_symbols_cubit.dart';
+import 'package:my_share_nepal/cubit/portfolio/portfolio_multi_symbols_cubit.dart';
+import 'package:my_share_nepal/cubit/symbols/symbols_cubit.dart';
 import 'package:my_share_nepal/cubit/theme_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_share_nepal/cubit/tools/cubit/symbol_comparison_cubit.dart';
 
 void main() {
   runApp(AppBase());
@@ -30,6 +31,9 @@ class AppBase extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => FetchSymbolsCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SymbolComparisonCubit(),
         ),
       ],
       child: AppBaseInternal(),

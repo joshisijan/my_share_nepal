@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_share_nepal/cubit/fetch_symbols_cubit.dart';
+import 'package:my_share_nepal/cubit/symbols/fetch_symbols_cubit.dart';
 import 'package:my_share_nepal/reusable/small_bottom_notification.dart';
 
 class BottomFetchingIndicator extends StatelessWidget {
