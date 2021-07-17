@@ -12,6 +12,10 @@ class SearchPage extends SearchDelegate {
   SearchPage({
     this.searchIndex = 0,
   });
+  bool showAllSelected = false;
+  bool valueIncreasedSelected = false;
+  bool constantValueSelected = false;
+  bool valueDecreasedSelected = false;
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -33,18 +37,7 @@ class SearchPage extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return query == ''
-        ? Align(
-            alignment: Alignment.topCenter,
-            child: MaterialButton(
-              child: Text('Show all'),
-              onPressed: () {
-                query = '';
-                showResults(context);
-              },
-            ),
-          )
-        : SizedBox.shrink();
+    return Container();
   }
 
   @override
@@ -69,6 +62,7 @@ class SearchPage extends SearchDelegate {
                 return Column(
                   children: symbolsState.symbols.map<Widget>((symbolModel) {
                         return SearchSymbolTile(
+                          searchIndex: searchIndex,
                           symbolModel: symbolModel,
                           onAdd: () {
                             showDialog(
