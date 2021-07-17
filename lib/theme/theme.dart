@@ -34,6 +34,9 @@ final kThemeList =
 
 ThemeData themeMaker(Map<String, Color> colorMap) {
   return ThemeData.light().copyWith(
+    appBarTheme: AppBarTheme(
+      brightness: Brightness.dark,
+    ),
     primaryColor: colorMap['primaryColor'],
     primaryColorDark: colorMap['primaryColorDark'],
     primaryColorLight: colorMap['primaryColorLight'],

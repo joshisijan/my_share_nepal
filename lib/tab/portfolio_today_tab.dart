@@ -35,7 +35,7 @@ class PortfolioTodayTab extends StatelessWidget {
               color: changePercentage < 0
                   ? Colors.red
                   : changePercentage == 0
-                      ? Theme.of(context).colorScheme.onPrimary.withAlpha(150)
+                      ? null
                       : Colors.green,
             ),
             Text(
@@ -47,10 +47,7 @@ class PortfolioTodayTab extends StatelessWidget {
                     color: changePercentage < 0
                         ? Colors.red
                         : changePercentage == 0
-                            ? Theme.of(context)
-                                .colorScheme
-                                .onPrimary
-                                .withAlpha(150)
+                            ? null
                             : Colors.green,
                   ),
             ),

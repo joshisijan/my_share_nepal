@@ -16,7 +16,7 @@ class ToolsCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 2 - 30.0,
       margin: EdgeInsets.only(bottom: kDefaultPadding),
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: Theme.of(context).primaryColorLight.withAlpha(50),
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
       ),
       child: MaterialButton(
@@ -27,7 +27,7 @@ class ToolsCard extends StatelessWidget {
             Icon(
               icon,
               size: 48.0,
-              color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+              color: Theme.of(context).primaryColor,
             ),
             SizedBox(
               height: kDefaultPadding / 2,
@@ -36,7 +36,7 @@ class ToolsCard extends StatelessWidget {
               title,
               style: TextStyle(
                 fontSize: Theme.of(context).textTheme.subtitle1!.fontSize,
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.bold,
               ),
             ),

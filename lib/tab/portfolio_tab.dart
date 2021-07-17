@@ -33,69 +33,83 @@ class _PortfolioTabState extends State<PortfolioTab> {
           ),
           Wrap(
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width / 2 - 20.0,
-                decoration: BoxDecoration(
+              MaterialButton(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-                  color: _tabIndex == 0
-                      ? Theme.of(context).primaryColorLight.withAlpha(150)
-                      : null,
                 ),
-                child: TextButton.icon(
-                  icon: Icon(
-                    Icons.today,
-                    color:
-                        Theme.of(context).colorScheme.onPrimary.withAlpha(150),
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 2 - 20.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+                    color: _tabIndex == 0
+                        ? Theme.of(context).primaryColorLight.withAlpha(50)
+                        : null,
                   ),
-                  label: Text(
-                    'Today',
-                    style: TextStyle(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
+                  child: TextButton.icon(
+                    icon: Icon(
+                      Icons.today,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Theme.of(context).primaryColor
+                          : Theme.of(context).primaryColorLight,
                     ),
+                    label: Text(
+                      'Today',
+                      style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Theme.of(context).primaryColor
+                            : Theme.of(context).primaryColorLight,
+                      ),
+                    ),
+                    onPressed: null,
                   ),
-                  onPressed: () {
-                    if (_tabIndex != 0) {
-                      setState(() {
-                        _tabIndex = 0;
-                      });
-                    }
-                  },
                 ),
+                onPressed: () {
+                  if (_tabIndex != 0) {
+                    setState(() {
+                      _tabIndex = 0;
+                    });
+                  }
+                },
               ),
-              Container(
-                width: MediaQuery.of(context).size.width / 2 - 20.0,
-                decoration: BoxDecoration(
+              MaterialButton(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(kDefaultBorderRadius),
-                  color: _tabIndex == 1
-                      ? Theme.of(context).primaryColorLight.withAlpha(150)
-                      : null,
                 ),
-                child: TextButton.icon(
-                  icon: Icon(
-                    Icons.bar_chart,
-                    color:
-                        Theme.of(context).colorScheme.onPrimary.withAlpha(150),
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 2 - 20.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+                    color: _tabIndex == 1
+                        ? Theme.of(context).primaryColorLight.withAlpha(50)
+                        : null,
                   ),
-                  label: Text(
-                    'Overall',
-                    style: TextStyle(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(150),
+                  child: TextButton.icon(
+                    icon: Icon(
+                      Icons.bar_chart,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Theme.of(context).primaryColor
+                          : Theme.of(context).primaryColorLight,
                     ),
+                    label: Text(
+                      'Overall',
+                      style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Theme.of(context).primaryColor
+                            : Theme.of(context).primaryColorLight,
+                      ),
+                    ),
+                    onPressed: null,
                   ),
-                  onPressed: () {
-                    if (_tabIndex != 1) {
-                      setState(() {
-                        _tabIndex = 1;
-                      });
-                    }
-                  },
                 ),
+                onPressed: () {
+                  if (_tabIndex != 1) {
+                    setState(() {
+                      _tabIndex = 1;
+                    });
+                  }
+                },
               ),
             ],
           ),
@@ -111,13 +125,22 @@ class _PortfolioTabState extends State<PortfolioTab> {
                 if (portfolioState.portfolioModels.isEmpty) {
                   return NoPortfolio();
                 }
-                return _tabIndex == 0
-                    ? PortfolioTodayTab(
-                        portfolioModels: portfolioState.portfolioModels,
-                      )
-                    : PortfolioOverallTab(
-                        portfolioModels: portfolioState.portfolioModels,
-                      );
+                return AnimatedSwitcher(
+                  duration: kDefaultDuration,
+                  transitionBuilder: (child, animation) {
+                    return ScaleTransition(
+                      scale: animation,
+                      child: child,
+                    );
+                  },
+                  child: _tabIndex == 0
+                      ? PortfolioTodayTab(
+                          portfolioModels: portfolioState.portfolioModels,
+                        )
+                      : PortfolioOverallTab(
+                          portfolioModels: portfolioState.portfolioModels,
+                        ),
+                );
               }
             },
           ),

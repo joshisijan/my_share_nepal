@@ -162,8 +162,7 @@ class MultiPortfolioEditDialog extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.check,
-              color: Theme.of(context).colorScheme.onPrimary.withAlpha(150)),
+          icon: Icon(Icons.check),
           onPressed: () {
             Navigator.pop(context);
           },

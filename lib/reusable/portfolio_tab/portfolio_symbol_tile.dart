@@ -31,9 +31,7 @@ class PortfolioSymbolTile extends StatelessWidget {
     SymbolModel? symbolModel = portfolioModel.symbolModel;
     return Column(
       children: [
-        Divider(
-          color: Theme.of(context).primaryColor,
-        ),
+        Divider(),
         Padding(
           padding: EdgeInsets.all(kDefaultPadding / 2),
           child: Row(
@@ -93,13 +91,7 @@ class PortfolioSymbolTile extends StatelessWidget {
               ),
               Text(
                 symbolModel == null ? 'Error' : symbolModel.symbol,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimary
-                          .withAlpha(200),
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: Theme.of(context).textTheme.subtitle2,
               ),
               SizedBox(
                 width: kDefaultPadding,
@@ -115,13 +107,7 @@ class PortfolioSymbolTile extends StatelessWidget {
                           ? 'Error'
                           : numberFormat.format(symbolModel.close),
                       textAlign: TextAlign.end,
-                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimary
-                                .withAlpha(200),
-                            fontWeight: FontWeight.bold,
-                          ),
+                      style: Theme.of(context).textTheme.subtitle2,
                     ),
                     SizedBox(
                       width: kDefaultPadding,
@@ -132,7 +118,8 @@ class PortfolioSymbolTile extends StatelessWidget {
                         vertical: kDefaultPadding / 3,
                       ),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
+                        color:
+                            Theme.of(context).primaryColorLight.withAlpha(50),
                         borderRadius:
                             BorderRadius.circular(kDefaultBorderRadius),
                       ),
@@ -154,10 +141,7 @@ class PortfolioSymbolTile extends StatelessWidget {
                                 : symbolModel.differencePercentage < 0
                                     ? Colors.red
                                     : symbolModel.differencePercentage == 0
-                                        ? Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary
-                                            .withAlpha(200)
+                                        ? null
                                         : Colors.green,
                           ),
                           Text(
@@ -181,10 +165,7 @@ class PortfolioSymbolTile extends StatelessWidget {
                                           ? Colors.red
                                           : symbolModel.differencePercentage ==
                                                   0
-                                              ? Theme.of(context)
-                                                  .colorScheme
-                                                  .onPrimary
-                                                  .withAlpha(200)
+                                              ? null
                                               : Colors.green,
                                 ),
                           ),

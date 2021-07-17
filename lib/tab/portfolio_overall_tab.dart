@@ -51,7 +51,7 @@ class PortfolioOverallTab extends StatelessWidget {
               color: changePercentage < 0
                   ? Colors.red
                   : changePercentage == 0
-                      ? Theme.of(context).colorScheme.onPrimary.withAlpha(200)
+                      ? null
                       : Colors.green,
             ),
             Text(
@@ -63,10 +63,7 @@ class PortfolioOverallTab extends StatelessWidget {
                     color: changePercentage < 0
                         ? Colors.red
                         : changePercentage == 0
-                            ? Theme.of(context)
-                                .colorScheme
-                                .onPrimary
-                                .withAlpha(200)
+                            ? null
                             : Colors.green,
                   ),
             ),
@@ -77,16 +74,11 @@ class PortfolioOverallTab extends StatelessWidget {
         ),
         Text(
           'Rs. ' + numberFormat.format(value),
-          style: Theme.of(context).textTheme.headline5!.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(context).textTheme.headline5,
         ),
         Text(
           'Value',
-          style: Theme.of(context).textTheme.overline!.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(200),
-              ),
+          style: Theme.of(context).textTheme.overline,
         ),
         SizedBox(
           height: kDefaultPadding,
@@ -97,7 +89,7 @@ class PortfolioOverallTab extends StatelessWidget {
                 color: change > 0
                     ? Colors.green
                     : change == 0
-                        ? Theme.of(context).colorScheme.onPrimary.withAlpha(200)
+                        ? null
                         : Colors.red,
                 fontWeight: FontWeight.bold,
               ),
@@ -112,7 +104,7 @@ class PortfolioOverallTab extends StatelessWidget {
                 color: change > 0
                     ? Colors.green
                     : change == 0
-                        ? Theme.of(context).colorScheme.onPrimary.withAlpha(150)
+                        ? null
                         : Colors.red,
               ),
         ),

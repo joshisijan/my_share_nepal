@@ -19,7 +19,7 @@ class SearchTab extends StatelessWidget {
             height: kDefaultPadding,
           ),
           Container(
-            color: Theme.of(context).buttonColor,
+            color: Theme.of(context).primaryColorLight.withAlpha(50),
             child: TextButton.icon(
               icon: Icon(Icons.search),
               label: Text('Search...'),
