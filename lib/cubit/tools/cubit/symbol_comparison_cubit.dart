@@ -10,7 +10,15 @@ class SymbolComparisonCubit extends Cubit<SymbolComparisonState> {
 
   addSymbol(SymbolModel symbolModel) {
     try {
-      emit(SymbolComparisonLoading());
+      if (state is SymbolComparisonAddedFrist) {
+        var currentState = (state as SymbolComparisonAddedFrist);
+        emit(SymbolComparisonAddedAll(
+          symbolModelOne: currentState.symbolModel,
+          symbolModelTwo: symbolModel,
+        ));
+      } else {
+        emit(SymbolComparisonAddedFrist(symbolModel: symbolModel));
+      }
     } catch (e) {
       emit(SymbolComparisonError());
     }

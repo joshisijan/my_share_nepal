@@ -4,8 +4,6 @@ class SymbolComparisonState {}
 
 class SymbolComparisonInitial extends SymbolComparisonState {}
 
-class SymbolComparisonLoading extends SymbolComparisonState {}
-
 class SymbolComparisonError extends SymbolComparisonState {}
 
 class SymbolComparisonAddedFrist extends SymbolComparisonState {

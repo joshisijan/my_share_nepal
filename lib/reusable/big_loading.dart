@@ -5,6 +5,7 @@ class BigLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.maxFinite,
       child: Column(
         children: [
           SizedBox(
