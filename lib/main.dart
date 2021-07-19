@@ -6,7 +6,7 @@ import 'package:my_share_nepal/cubit/portfolio/portfolio_multi_symbols_cubit.dar
 import 'package:my_share_nepal/cubit/symbols/symbols_cubit.dart';
 import 'package:my_share_nepal/cubit/theme_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_share_nepal/cubit/tools/cubit/symbol_comparison_cubit.dart';
+import 'package:my_share_nepal/cubit/tools/symbol_comparison_cubit.dart';
 
 void main() {
   runApp(AppBase());

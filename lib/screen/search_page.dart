@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_share_nepal/cubit/symbols/symbols_cubit.dart';
-import 'package:my_share_nepal/cubit/tools/cubit/symbol_comparison_cubit.dart';
+import 'package:my_share_nepal/cubit/tools/symbol_comparison_cubit.dart';
 import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/reusable/big_loading.dart';
 import 'package:my_share_nepal/reusable/search_tab/search_symbol_tile.dart';
+import 'package:my_share_nepal/screen/symbol_analysis_page.dart';
 import 'package:my_share_nepal/widget/portfolio_tab/add_portfolio_dialog.dart';
 import 'package:my_share_nepal/widget/search_tab/no_search_result.dart';
 
@@ -75,7 +76,13 @@ class SearchPage extends SearchDelegate {
                                 .addSymbol(symbolModel);
                             Navigator.pop(context);
                           },
-                          onAnalysis: () {},
+                          onAnalysis: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => SymbolAnalysisPage(
+                                symbolModel: symbolModel,
+                              ),
+                            ));
+                          },
                         );
                       }).toList() +
                       (symbolsState.symbols.length > 0

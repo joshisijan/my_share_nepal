@@ -5,10 +5,12 @@ class ToolsCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final Function() onPressed;
+  final bool isError;
   ToolsCard({
     required this.title,
     required this.icon,
     required this.onPressed,
+    this.isError = false,
   });
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,9 @@ class ToolsCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 2 - 30.0,
           padding: EdgeInsets.symmetric(vertical: kDefaultPadding),
           decoration: BoxDecoration(
-            color: Theme.of(context).primaryColorLight.withAlpha(50),
+            color: isError
+                ? Theme.of(context).errorColor.withAlpha(50)
+                : Theme.of(context).primaryColorLight.withAlpha(50),
             borderRadius: BorderRadius.circular(kDefaultBorderRadius),
           ),
           child: Column(
@@ -32,7 +36,9 @@ class ToolsCard extends StatelessWidget {
               Icon(
                 icon,
                 size: 48.0,
-                color: Theme.of(context).primaryColor,
+                color: isError
+                    ? Theme.of(context).errorColor
+                    : Theme.of(context).primaryColor,
               ),
               SizedBox(
                 height: kDefaultPadding / 2,
@@ -41,7 +47,9 @@ class ToolsCard extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontSize: Theme.of(context).textTheme.subtitle1!.fontSize,
-                  color: Theme.of(context).primaryColor,
+                  color: isError
+                      ? Theme.of(context).errorColor
+                      : Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),

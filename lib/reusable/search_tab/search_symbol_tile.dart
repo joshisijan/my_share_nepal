@@ -3,6 +3,7 @@ import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
 import 'package:my_share_nepal/reusable/custom_popup_menu_button.dart';
 import 'package:my_share_nepal/reusable/text_icon_button.dart';
+import 'package:my_share_nepal/screen/symbol_analysis_page.dart';
 import 'package:my_share_nepal/screen/symbol_detail_page.dart';
 
 class SearchSymbolTile extends StatelessWidget {
@@ -44,7 +45,13 @@ class SearchSymbolTile extends StatelessWidget {
                       ));
                     } else if (value == 1) {
                       onAdd.call();
-                    } else {}
+                    } else {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => SymbolAnalysisPage(
+                          symbolModel: symbolModel,
+                        ),
+                      ));
+                    }
                   },
                   itemBuilder: (context) {
                     return [

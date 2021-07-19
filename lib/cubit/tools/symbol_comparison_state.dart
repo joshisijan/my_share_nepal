@@ -4,19 +4,17 @@ class SymbolComparisonState {}
 
 class SymbolComparisonInitial extends SymbolComparisonState {}
 
-class SymbolComparisonError extends SymbolComparisonState {}
-
-class SymbolComparisonAddedFirst extends SymbolComparisonState {
+class SymbolComparisonAddedOne extends SymbolComparisonState {
   final SymbolModel symbolModel;
-  SymbolComparisonAddedFirst({
+  SymbolComparisonAddedOne({
     required this.symbolModel,
   });
 }
 
-class SymbolComparisonAddedAll extends SymbolComparisonState {
+class SymbolComparisonAddedTwo extends SymbolComparisonState {
   final SymbolModel symbolModelOne;
   final SymbolModel symbolModelTwo;
-  SymbolComparisonAddedAll({
+  SymbolComparisonAddedTwo({
     required this.symbolModelOne,
     required this.symbolModelTwo,
   });
