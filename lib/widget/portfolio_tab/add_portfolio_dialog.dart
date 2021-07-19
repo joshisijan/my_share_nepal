@@ -147,7 +147,7 @@ class _AddPortfolioDialogState extends State<AddPortfolioDialog> {
                     ),
               MaterialButton(
                 child: purchaseDate == null
-                    ? Text('Select Purchase DateText')
+                    ? Text('Select Purchase Date')
                     : Text('Change Purchase Date'),
                 textColor: Theme.of(context).primaryColor,
                 onPressed: () async {
