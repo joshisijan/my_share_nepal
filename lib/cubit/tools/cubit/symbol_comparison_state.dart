@@ -6,9 +6,9 @@ class SymbolComparisonInitial extends SymbolComparisonState {}
 
 class SymbolComparisonError extends SymbolComparisonState {}
 
-class SymbolComparisonAddedFrist extends SymbolComparisonState {
+class SymbolComparisonAddedFirst extends SymbolComparisonState {
   final SymbolModel symbolModel;
-  SymbolComparisonAddedFrist({
+  SymbolComparisonAddedFirst({
     required this.symbolModel,
   });
 }

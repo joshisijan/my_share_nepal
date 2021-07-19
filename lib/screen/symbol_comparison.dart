@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_share_nepal/cubit/tools/cubit/symbol_comparison_cubit.dart';
+import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/helper/utilities.dart';
 import 'package:my_share_nepal/reusable/big_error.dart';
 import 'package:my_share_nepal/reusable/nothing_found.dart';
@@ -49,7 +50,7 @@ class SymbolComparisonPage extends StatelessWidget {
                 context.read<SymbolComparisonCubit>().resetSymbol();
               },
             );
-          } else if (symbolComparisonState is SymbolComparisonAddedFrist) {
+          } else if (symbolComparisonState is SymbolComparisonAddedFirst) {
             return ComparisonTable(
               symbolModelOne: symbolComparisonState.symbolModel,
             );

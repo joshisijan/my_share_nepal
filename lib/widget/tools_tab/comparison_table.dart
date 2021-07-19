@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:my_share_nepal/helper/constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_share_nepal/cubit/tools/cubit/symbol_comparison_cubit.dart';
 import 'package:my_share_nepal/model/symbol_model.dart';
+import 'package:my_share_nepal/reusable/text_icon_button.dart';
 
 class ComparisonTable extends StatelessWidget {
   final SymbolModel symbolModelOne;
@@ -18,107 +20,301 @@ class ComparisonTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Table(
-          border: TableBorder.all(
-            color: Theme.of(context).primaryColor.withAlpha(50),
-          ),
-          children: [
-            customTableRow(
-              context,
-              'Symbol',
-              symbolModelOne.symbol,
-              symbolModelTwo == null ? 'Not Added' : symbolModelTwo!.symbol,
+        DataTable(
+          columnSpacing: 1.0,
+          dataTextStyle: Theme.of(context).textTheme.bodyText1,
+          columns: [
+            DataColumn(
+              label: Text(''),
             ),
-            customTableRow(
-              context,
-              'Open',
-              numberFormat.format(symbolModelOne.open),
-              symbolModelTwo == null
-                  ? 'Not Added'
-                  : numberFormat.format(symbolModelTwo!.open),
+            DataColumn(
+              label: IconTextButton(
+                icon: Icons.clear,
+                label: 'Remove',
+                isError: true,
+                onPressed: () {
+                  context.read<SymbolComparisonCubit>().removeSymbol(0);
+                },
+              ),
             ),
-            customTableRow(
-                context,
-                'High',
-                numberFormat.format(symbolModelOne.high),
-                symbolModelTwo == null
-                    ? 'Not Added'
-                    : numberFormat.format(
-                        symbolModelTwo!.high,
-                      )),
-            customTableRow(
-              context,
-              'Low',
-              numberFormat.format(symbolModelOne.low),
-              symbolModelTwo == null
-                  ? 'Not Added'
-                  : numberFormat.format(symbolModelTwo!.low),
-            ),
-            customTableRow(
-              context,
-              'LTP',
-              numberFormat.format(symbolModelOne.close),
-              symbolModelTwo == null
-                  ? 'Not Added'
-                  : numberFormat.format(symbolModelTwo!.close),
+            DataColumn(
+              label: symbolModelTwo == null
+                  ? SizedBox.shrink()
+                  : IconTextButton(
+                      icon: Icons.clear,
+                      label: 'Remove',
+                      isError: true,
+                      onPressed: () {
+                        context.read<SymbolComparisonCubit>().removeSymbol(1);
+                      },
+                    ),
             ),
           ],
-        ),
-      ],
-    );
-  }
-
-  TableRow customTableRow(
-    BuildContext context,
-    String title,
-    dynamic first,
-    dynamic second,
-  ) {
-    return TableRow(
-      children: [
-        TableCell(
-          child: Container(
-            alignment: Alignment.center,
-            color: Theme.of(context).primaryColorLight.withAlpha(50),
-            padding: EdgeInsets.symmetric(
-              horizontal: kHalfPadding,
-              vertical: kDefaultPadding,
-            ),
-            child: Text(
-              title,
-              style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                    color: Theme.of(context).primaryColor,
+          rows: [
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColorLight.withAlpha(50),
+              ),
+              cells: [
+                DataCell(
+                  Text('Symbol'),
+                ),
+                DataCell(
+                  Text(symbolModelOne.symbol),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : symbolModelTwo!.symbol,
                   ),
+                ),
+              ],
             ),
-          ),
-        ),
-        TableCell(
-          child: Container(
-            alignment: Alignment.center,
-            color: Theme.of(context).primaryColor.withAlpha(50),
-            padding: EdgeInsets.symmetric(
-              horizontal: kHalfPadding,
-              vertical: kDefaultPadding,
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColor.withAlpha(70),
+              ),
+              cells: [
+                DataCell(
+                  Text('Open'),
+                ),
+                DataCell(
+                  Text(numberFormat.format(symbolModelOne.open)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat.format(symbolModelTwo!.open),
+                  ),
+                ),
+              ],
             ),
-            child: Text(
-              first,
-              style: Theme.of(context).textTheme.bodyText1,
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColorLight.withAlpha(50),
+              ),
+              cells: [
+                DataCell(
+                  Text('High'),
+                ),
+                DataCell(
+                  Text(numberFormat.format(symbolModelOne.high)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat.format(symbolModelTwo!.high),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ),
-        TableCell(
-          child: Container(
-            alignment: Alignment.center,
-            color: Theme.of(context).primaryColorDark.withAlpha(50),
-            padding: EdgeInsets.symmetric(
-              horizontal: kHalfPadding,
-              vertical: kDefaultPadding,
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColor.withAlpha(70),
+              ),
+              cells: [
+                DataCell(
+                  Text('Low'),
+                ),
+                DataCell(
+                  Text(numberFormat.format(symbolModelOne.low)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat.format(symbolModelTwo!.low),
+                  ),
+                ),
+              ],
             ),
-            child: Text(
-              second,
-              style: Theme.of(context).textTheme.bodyText1,
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColorLight.withAlpha(50),
+              ),
+              cells: [
+                DataCell(
+                  Text('Close'),
+                ),
+                DataCell(
+                  Text(numberFormat.format(symbolModelOne.close)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat.format(symbolModelTwo!.close),
+                  ),
+                ),
+              ],
             ),
-          ),
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColor.withAlpha(70),
+              ),
+              cells: [
+                DataCell(
+                  Text('Volume'),
+                ),
+                DataCell(
+                  Text(numberFormat.format(symbolModelOne.volume)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat.format(symbolModelTwo!.volume),
+                  ),
+                ),
+              ],
+            ),
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColorLight.withAlpha(50),
+              ),
+              cells: [
+                DataCell(
+                  Text('Previous Close'),
+                ),
+                DataCell(
+                  Text(numberFormat.format(symbolModelOne.previousClose)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat.format(symbolModelTwo!.previousClose),
+                  ),
+                ),
+              ],
+            ),
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColor.withAlpha(70),
+              ),
+              cells: [
+                DataCell(
+                  Text('Turnover'),
+                ),
+                DataCell(
+                  Text(numberFormat.format(symbolModelOne.turnover)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat.format(symbolModelTwo!.turnover),
+                  ),
+                ),
+              ],
+            ),
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColorLight.withAlpha(50),
+              ),
+              cells: [
+                DataCell(
+                  Text('Transactions'),
+                ),
+                DataCell(
+                  Text(numberFormat.format(symbolModelOne.transactions)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat.format(symbolModelTwo!.transactions),
+                  ),
+                ),
+              ],
+            ),
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColor.withAlpha(70),
+              ),
+              cells: [
+                DataCell(
+                  Text('Difference'),
+                ),
+                DataCell(
+                  Text(numberFormat.format(symbolModelOne.difference)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat.format(symbolModelTwo!.difference),
+                  ),
+                ),
+              ],
+            ),
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColorLight.withAlpha(50),
+              ),
+              cells: [
+                DataCell(
+                  Text('Difference Percentage'),
+                ),
+                DataCell(
+                  Text(
+                      numberFormat.format(symbolModelOne.differencePercentage)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat
+                            .format(symbolModelTwo!.differencePercentage),
+                  ),
+                ),
+              ],
+            ),
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColor.withAlpha(70),
+              ),
+              cells: [
+                DataCell(
+                  Text('52 Weeks High'),
+                ),
+                DataCell(
+                  Text(numberFormat.format(symbolModelOne.fiftyTwoWeeksHigh)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat
+                            .format(symbolModelTwo!.fiftyTwoWeeksHigh),
+                  ),
+                ),
+              ],
+            ),
+            DataRow(
+              color: MaterialStateProperty.all<Color>(
+                Theme.of(context).primaryColorLight.withAlpha(50),
+              ),
+              cells: [
+                DataCell(
+                  Text('52 Weeks Low'),
+                ),
+                DataCell(
+                  Text(numberFormat.format(symbolModelOne.fiftyTwoWeeksLow)),
+                ),
+                DataCell(
+                  Text(
+                    symbolModelTwo == null
+                        ? 'Not Added'
+                        : numberFormat.format(symbolModelTwo!.fiftyTwoWeeksLow),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );

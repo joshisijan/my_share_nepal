@@ -18,8 +18,7 @@ class HomeTab extends StatelessWidget {
             textColor: Colors.white,
             child: Text('fetch'),
             onPressed: () async {
-              await context.read<FetchSymbolsCubit>().fetchSymbols();
-              context.read<PortfolioCubit>().getPortfolio();
+              context.read<FetchSymbolsCubit>().fetchSymbols();
             },
           ),
           MaterialButton(

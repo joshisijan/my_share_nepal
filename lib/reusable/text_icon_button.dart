@@ -5,11 +5,13 @@ class IconTextButton extends StatelessWidget {
   final IconData icon;
   final String label;
   final Function()? onPressed;
+  final bool isError;
 
   const IconTextButton({
     required this.icon,
     required this.label,
     this.onPressed,
+    this.isError = false,
   });
 
   @override
@@ -17,7 +19,9 @@ class IconTextButton extends StatelessWidget {
     return TextButton.icon(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(
-          Theme.of(context).primaryColorLight.withAlpha(50),
+          isError
+              ? Theme.of(context).errorColor
+              : Theme.of(context).primaryColorLight.withAlpha(50),
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
@@ -30,8 +34,16 @@ class IconTextButton extends StatelessWidget {
           ),
         ),
       ),
-      icon: Icon(icon),
-      label: Text(label),
+      icon: Icon(
+        icon,
+        color: isError ? Theme.of(context).colorScheme.onPrimary : null,
+      ),
+      label: Text(
+        label,
+        style: TextStyle(
+          color: isError ? Theme.of(context).colorScheme.onPrimary : null,
+        ),
+      ),
       onPressed: onPressed,
     );
   }
