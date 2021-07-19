@@ -13,10 +13,6 @@ class SearchPage extends SearchDelegate {
   SearchPage({
     this.searchIndex = 0,
   });
-  bool showAllSelected = false;
-  bool valueIncreasedSelected = false;
-  bool constantValueSelected = false;
-  bool valueDecreasedSelected = false;
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -74,11 +70,12 @@ class SearchPage extends SearchDelegate {
                             );
                           },
                           onCompare: () async {
-                            context
+                            await context
                                 .read<SymbolComparisonCubit>()
                                 .addSymbol(symbolModel);
                             Navigator.pop(context);
                           },
+                          onAnalysis: () {},
                         );
                       }).toList() +
                       (symbolsState.symbols.length > 0

@@ -10,11 +10,13 @@ class SearchSymbolTile extends StatelessWidget {
   final int searchIndex;
   final Function() onAdd;
   final Function() onCompare;
+  final Function() onAnalysis;
   SearchSymbolTile({
     required this.symbolModel,
     this.searchIndex = 0,
     required this.onAdd,
     required this.onCompare,
+    required this.onAnalysis,
   });
   @override
   Widget build(BuildContext context) {
@@ -40,9 +42,9 @@ class SearchSymbolTile extends StatelessWidget {
                           symbolModel: symbolModel,
                         ),
                       ));
-                    } else {
+                    } else if (value == 1) {
                       onAdd.call();
-                    }
+                    } else {}
                   },
                   itemBuilder: (context) {
                     return [
@@ -62,6 +64,14 @@ class SearchSymbolTile extends StatelessWidget {
                           title: Text('Add to portfolio'),
                         ),
                       ),
+                      PopupMenuItem(
+                        value: 2,
+                        child: ListTile(
+                          dense: true,
+                          leading: Icon(Icons.insights),
+                          title: Text('Analysis'),
+                        ),
+                      ),
                     ];
                   },
                 );
@@ -71,11 +81,17 @@ class SearchSymbolTile extends StatelessWidget {
                   label: 'Add',
                   onPressed: onAdd,
                 );
-              } else {
+              } else if (searchIndex == 2) {
                 return IconTextButton(
                   icon: Icons.add,
                   label: 'Compare',
                   onPressed: onCompare,
+                );
+              } else {
+                return IconTextButton(
+                  icon: Icons.insights,
+                  label: 'Analysis',
+                  onPressed: onAnalysis,
                 );
               }
             },

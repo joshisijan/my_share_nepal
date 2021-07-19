@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_share_nepal/helper/constants.dart';
 import 'package:my_share_nepal/reusable/tools_card.dart';
+import 'package:my_share_nepal/screen/search_page.dart';
 import 'package:my_share_nepal/screen/symbol_comparison.dart';
 
 class ToolsTab extends StatelessWidget {
@@ -40,7 +41,14 @@ class ToolsTab extends StatelessWidget {
               ToolsCard(
                 title: 'Analysis',
                 icon: Icons.insights,
-                onPressed: () {},
+                onPressed: () {
+                  showSearch(
+                    context: context,
+                    delegate: SearchPage(
+                      searchIndex: 3,
+                    ),
+                  );
+                },
               ),
             ],
           ),
