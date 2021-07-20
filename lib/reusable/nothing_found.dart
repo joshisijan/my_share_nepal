@@ -6,6 +6,7 @@ class NothingFound extends StatelessWidget {
   final String title;
   final String text;
   final bool isError;
+  final bool noTopPadding;
   final Function()? onReload;
 
   NothingFound({
@@ -13,6 +14,7 @@ class NothingFound extends StatelessWidget {
     required this.title,
     required this.text,
     this.isError = false,
+    this.noTopPadding = false,
     this.onReload,
   });
   @override
@@ -20,12 +22,12 @@ class NothingFound extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       padding: EdgeInsets.symmetric(
-        horizontal: kDefaultPadding * 2,
+        horizontal: kDoublePadding,
       ),
       child: Column(
         children: [
           SizedBox(
-            height: kDefaultPadding * 4,
+            height: noTopPadding ? 0.0 : kDefaultPadding * 4,
           ),
           Icon(
             this.icon,

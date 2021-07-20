@@ -42,9 +42,23 @@ class _AnalysisGaugeState extends State<AnalysisGauge>
     });
   }
 
+  String analysisText(double? value) {
+    if (value == null)
+      return '';
+    else if (value <= 0.4)
+      return 'Not Good';
+    else if (value > 0.4 && value <= 60)
+      return 'Average';
+    else
+      return 'Good';
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width * 0.5;
+    if (widget.value != null) {
+      _animationController.stop();
+    }
     return Column(
       children: [
         Align(
@@ -67,7 +81,10 @@ class _AnalysisGaugeState extends State<AnalysisGauge>
                 ),
                 Center(
                   child: Text(
-                    (_animationValue * 100).ceil().toString() + '%',
+                    ((widget.value ?? _animationValue) * 100)
+                            .ceil()
+                            .toString() +
+                        '%',
                     style: Theme.of(context).textTheme.headline3!.copyWith(
                           fontWeight: FontWeight.bold,
                           color: ColorTween(
@@ -83,18 +100,22 @@ class _AnalysisGaugeState extends State<AnalysisGauge>
         ),
         SizedBox(height: kDefaultPadding),
         Text(
-          'Analysing',
+          widget.value == null ? 'Analysing' : 'Analysis Result',
           style: Theme.of(context).textTheme.headline6,
         ),
         Text(
-          'Analysis Result',
-          style: Theme.of(context).textTheme.headline6,
+          widget.value == null ? 'It may take some time' : '',
+          style: Theme.of(context).textTheme.overline,
         ),
-        MaterialButton(
-          child: Text('Stop Animation'),
-          onPressed: () {
-            _animationController.stop();
-          },
+        Text(
+          analysisText(widget.value),
+          style: Theme.of(context).textTheme.headline4!.copyWith(
+                color: ColorTween(
+                  begin: Colors.red,
+                  end: Colors.green,
+                ).animate(_animationController).value,
+                fontWeight: FontWeight.bold,
+              ),
         ),
       ],
     );
