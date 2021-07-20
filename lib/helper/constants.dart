@@ -12,4 +12,7 @@ const double kLargeIconSize = 48.0;
 const double kExtraLargeIconSize = 64.0;
 
 const Duration kDefaultDuration = Duration(milliseconds: 200);
+const Duration kGaugeDuration = Duration(milliseconds: 3500);
 const Curve kDefaultCurve = Curves.easeIn;
+
+const kGaugeWidth = 20.0;
